@@ -102,7 +102,6 @@ for file_name in os.listdir(folder_path):
         uds4_rdcp.columns = uds4_rdcp.columns.str.lower()
         uds3_rdcp.columns = uds3_rdcp.columns.str.lower()
         uds4_rdcp = uds4_rdcp.iloc[:, :12]
-        uds4_rdcp.rename(columns={"uds4 data element name": "uds4 data element"}, inplace=True)
 
         # Merge data
         test = pd.merge(df, uds4_rdcp, on='uds4 data element')
