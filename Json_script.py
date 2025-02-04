@@ -5,13 +5,13 @@ import re
 from datetime import datetime
 
 # Define the folder containing the files
-folder_path = r'C:\Users\jaiga\Downloads\Crosswalks'  # Replace with your folder path
+folder_path = r'C:\Users\jaiga\Downloads\Crosswalks' # Replace with your folder path
 
 def json_serializer(obj):
     if isinstance(obj, datetime):
         return obj.isoformat()  # Converts datetime to an ISO 8601 string
     raise TypeError(f"Type {type(obj)} not serializable")
-    
+
 def clean_text(obj):
     """ Recursively clean text fields in JSON structure. """
     if isinstance(obj, dict):
@@ -40,8 +40,9 @@ def classify_variable(df):
                 return 'cc'
         else:
             return 'complex'
-            
-    classifications = df.groupby('uds4 data element', group_keys=False).apply(classify)
+
+    classifications = df.groupby('uds4 data element').apply(classify)
+    #classifications = df.groupby('uds4 data element', group_keys=False).apply(classify)
     df = df.merge(classifications.rename('class'), on='uds4 data element', how='left')
     return df
 
@@ -112,6 +113,7 @@ for file_name in os.listdir(folder_path):
         uds4_rdcp.columns = uds4_rdcp.columns.str.lower()
         uds3_rdcp.columns = uds3_rdcp.columns.str.lower()
         uds4_rdcp = uds4_rdcp.iloc[:, :12]
+        uds4_rdcp.rename(columns={"uds4 data element name": "uds4 data element"}, inplace=True)
 
         # Merge data
         test = pd.merge(df, uds4_rdcp, on='uds4 data element')
@@ -126,12 +128,12 @@ for file_name in os.listdir(folder_path):
 
         all_mappings = categorize_variables(result)
         all_mappings = clean_text(all_mappings)
-        all_mappings = json.dumps(all_mappings, ensure_ascii=False, indent=4, default=json_serializer)
+        all_mappings = json.dumps(all_mappings, ensure_ascii=False, indent=4,default=json_serializer)
 
         # Save output to JSON
         output_path = os.path.join(folder_path, f"{os.path.splitext(file_name)[0]}_mappings.json")
         with open(output_path, 'w', encoding='utf-8') as json_file:
-            json_file.write(all_mappings)
             #json.dump(all_mappings, json_file, ensure_ascii=False, indent=4,default=json_serializer)
+            json_file.write(all_mappings)
 
         print(f"Processed and saved: {output_path}")
