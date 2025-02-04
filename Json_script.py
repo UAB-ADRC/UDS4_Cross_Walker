@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import json
+import re
 from datetime import datetime
 
 # Define the folder containing the files
@@ -10,6 +11,16 @@ def json_serializer(obj):
     if isinstance(obj, datetime):
         return obj.isoformat()  # Converts datetime to an ISO 8601 string
     raise TypeError(f"Type {type(obj)} not serializable")
+    
+def clean_text(obj):
+    """ Recursively clean text fields in JSON structure. """
+    if isinstance(obj, dict):
+        return {k: clean_text(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [clean_text(i) for i in obj]
+    elif isinstance(obj, str):
+        return obj.replace('_x000D_', '').strip()  # Remove unwanted characters
+    return obj
 
 # Function to classify variables
 def classify_variable(df):
@@ -29,8 +40,7 @@ def classify_variable(df):
                 return 'cc'
         else:
             return 'complex'
-
-    #classifications = df.groupby('uds4 data element').apply(classify)
+            
     classifications = df.groupby('uds4 data element', group_keys=False).apply(classify)
     df = df.merge(classifications.rename('class'), on='uds4 data element', how='left')
     return df
@@ -115,10 +125,13 @@ for file_name in os.listdir(folder_path):
         result.loc[result['uds4 value'] == "<BLANK>", 'uds4 value'] = ""
 
         all_mappings = categorize_variables(result)
+        all_mappings = clean_text(all_mappings)
+        all_mappings = json.dumps(all_mappings, ensure_ascii=False, indent=4, default=json_serializer)
 
         # Save output to JSON
         output_path = os.path.join(folder_path, f"{os.path.splitext(file_name)[0]}_mappings.json")
         with open(output_path, 'w', encoding='utf-8') as json_file:
-            json.dump(all_mappings, json_file, ensure_ascii=False, indent=4,default=json_serializer)
+            json_file.write(all_mappings)
+            #json.dump(all_mappings, json_file, ensure_ascii=False, indent=4,default=json_serializer)
 
         print(f"Processed and saved: {output_path}")
