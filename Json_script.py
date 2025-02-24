@@ -1,11 +1,12 @@
-import os
+import os,sys
 import pandas as pd
 import json
 import re
 from datetime import datetime
 
 # Define the folder containing the files
-folder_path = r'C:\Users\jaiga\Downloads\Crosswalks' # Replace with your folder path
+#folder_path = r'C:\Users\jaiga\Downloads\Crosswalks' # Replace with your folder path
+folder_path = sys.argv[1]
 
 def json_serializer(obj):
     if isinstance(obj, datetime):
