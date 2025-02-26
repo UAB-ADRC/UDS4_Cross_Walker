@@ -364,7 +364,7 @@ ADRC</li>
 </div>
 <div id="license" class="section level2">
 <h2>License</h2>
-<p>This project is licensed under the MIT License - see <a href="LICENSE">LICENSE</a> for details</p>
+<p>This project is licensed under the MIT License - see <a href="LICENSE.md">LICENSE</a> for details</p>
 </div>
 <div id="uds_json_maker.py" class="section level2">
 <h2>UDS_JSON_Maker.py</h2>
@@ -401,8 +401,9 @@ can be applied here.</li>
 by the ADRC. Options are flagged as ADRC Decision_A and ADRC Decision_B
 where applicable to indicate rule sets.</li>
 </ul>
-<p><br> <strong>ADRC Decisions must be vetted and added to the Mappings
-Data Dictionary before compiling JSON files!</strong></p>
+<p><strong>Rules in ‘Mappings - ADRC Decisions’ must be vetted and added
+to the ‘Template Mappings REDCap’ sheet before compiling JSON
+files!</strong></p>
 </div>
 <div id="modification-of-template-mappings" class="section level2">
 <h2>Modification of Template Mappings</h2>
@@ -436,35 +437,38 @@ controlling environment e.g. conda)</p>
 <h3>How to Use the Script</h3>
 <p>Step 1: Prepare Your Files Ensure that your Excel files are located
 in a folder on your computer. Default</p>
-<p>Step 2: Run the Script To run the script, open a terminal (or command
-prompt) and navigate to the folder where the script is located. Then,
-run the following command, replacing <folder_path> with the path to the
-folder containing your Excel files:
+<p>Step 2: Run the Script To run the script, open your terminal or
+command prompt and navigate to the folder where the script is located.
+Run the following command, replacing <folder_path> with the path to the
+folder containing your Excel files if needed:
 <code>bash python UDS_JSON_Maker.py &lt;folder_path&gt;</code> For
 example:
 <code>bash python UDS_JSON_Maker.py C:/Users/YourUsername/Downloads/crosswalks</code>
-If no folder path is provided, this will default to ‘./Crosswalk’
-located in folder from which the UDS_JSON_Maker.py is run</p>
+<strong><em>If no folder path is provided, this will default to
+‘./Crosswalk’ located in folder from which the UDS_JSON_Maker.py is run.
+For convenience, a collection of crosswalk sheets are provided
+here.</em></strong></p>
 <p>The script will process all Excel files in the provided folder and
 generate: - A JSON file for each Excel file, named
 <original_filename>_mappings.json which can then be used for a
 programmatic crosswalk.</p>
 <p>Step 3: <strong>Check the Output</strong>: After running the script,
 the generated JSON files are in the same folder as the Excel files.</p>
-<p><strong>Note</strong>: Ensure that the Excel files contain the
-required content in Sheet 3 and Sheet 5. Some files like A1a, A4a, etc.,
-which do not have the Template Mappings REDCap sheet . When providing
-the folder path as an argument, please make sure to remove or delete
-those Excel crosswalk files from the folder before running the
-script.</p>
+<p><strong>Note</strong>: Ensure the Excel files contain the required
+input in the UDS3/4 REDCap dictionary sheets and Template Mappings
+sheets. Note, new UDS4 forms have no mappings rules thus some crosswalk
+files for forms like A1a, A4a, etc., do not have the ‘Template Mappings
+REDCap’ sheet . Be sure to remove or delete those Excel crosswalk files
+from the folder before running the script.</p>
 </div>
 </div>
 <div id="troubleshooting" class="section level2">
 <h2>Troubleshooting</h2>
 <p>If you encounter any issues, ensure that you are using the correct
 Python version and have installed all dependencies from the
-requirements.txt file. Make sure that the folder path provided contains
-only .xlsx files that match the required format.</p>
+requirements.txt file.<br> Make sure that the folder path provided
+contains only .xlsx files that match the required format described in
+the Crosswalk section above.</p>
 </div>
 </div>
 

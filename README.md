@@ -5,7 +5,7 @@
 - [Jai Nagidi](https://github.com/jnagidi), UAB ADRC
 
 ## License
-This project is licensed under the MIT License - see [LICENSE](LICENSE) for details
+This project is licensed under the MIT License - see [LICENSE](LICENSE.md) for details
 
 ## UDS_JSON_Maker.py
 This is the primary Python script which processes Excel files in a given folder (given as a command line argument), process the relevant mapping rules, and saves the output as JSON.<br>
@@ -24,7 +24,7 @@ This folder contains properly formatted Excel workbooks used by the Python scrip
   - Template Mappings REDCap: The sheet containing all rules processed and stored into JSON format.  Modifications to rules for a specific ADRC can be applied here.
   - XX Mappings - ADRC Decisions: Ambiguous rules that should be vetted by the ADRC.  Options are flagged as ADRC Decision_A and ADRC Decision_B where applicable to indicate rule sets.
 
-**Rules in 'Mappings - ADRC Decisions' must be vetted and added to the 'Template Mappings REDCap' sheet before compiling JSON files!**:
+**Rules in 'Mappings - ADRC Decisions' must be vetted and added to the 'Template Mappings REDCap' sheet before compiling JSON files!**
 
 ## Modification of Template Mappings
 Template mappings can be modified as needed to reflect your specific instance of UDS3 and UDS4.  Structure on the Template Mappings REDCap should remain consistent, simply update the entries in the 'UDS3 value' and 'UDS4 value' columns.<br>
@@ -58,7 +58,7 @@ For example:
  ```bash
 python UDS_JSON_Maker.py C:/Users/YourUsername/Downloads/crosswalks
  ```
-_If no folder path is provided, this will default to './Crosswalk' located in folder from which the UDS_JSON_Maker.py is run.  For convenience, a collection of crosswalk sheets are provided here._
+___If no folder path is provided, this will default to './Crosswalk' located in folder from which the UDS_JSON_Maker.py is run.  For convenience, a collection of crosswalk sheets are provided here.___
 
 The script will process all Excel files in the provided folder and generate:
 - A JSON file for each Excel file, named <original_filename>_mappings.json which can then be used for a programmatic crosswalk.
