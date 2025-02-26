@@ -36,7 +36,7 @@ def clean_text(obj):
 # Classification of the columns in the template mappings for JSON processing
 def classify_variable(df):
     def classify(group):
-      # Direct mapping in UDS4/UDS3 column names are the same
+      # Direct mapping in UDS4/UDS3 column names ending with "X", with no change in their data types(e.g. free text fields like primlangx)
         if group['uds4 data element'].str.endswith('X').all() and group['uds3 data element'].str.endswith('X').all() and group['data type change'].eq('No').all():
             return 'direct'
       # Special structured mappings and mergings
@@ -50,7 +50,7 @@ def classify_variable(df):
           # If conformity or data type change exists, use conditional consistency
             if group['conformity change'].eq('Yes').any() or group['data type change'].eq('Yes').any() or group['change in form'].eq('Yes').any():
                 return 'cc'
-          # If conformity change not in place for special mapping (e.g. free text fields) return direct mappings
+          # If conformity change not in place for special mapping and the column names are the same in UDS4/UDS3, return direct mappings
             elif group['uds4 data element'].iloc[0] == group['uds3 data element'].iloc[0]:
                 return 'direct'
             else:
