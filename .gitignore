@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 Json_SOPS.Rproj
+json_parser/
+*.ipynb
