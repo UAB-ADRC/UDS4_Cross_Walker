@@ -1,0 +1,2109 @@
+{
+    "Direct_Mappings": [
+        {
+            "UDS3_variable": "HEIGHT",
+            "UDS4_variable": "HEIGHT",
+            "crosswalk_remappings": [
+                {
+                    "mapping_type": "UDS form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "B1",
+                            "UDS4_value": "B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": 1,
+                            "UDS4_value": 1,
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1. Subject height (inches)",
+                            "UDS4_value": "1. Participant height (inches)",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Number with factor",
+                            "UDS4_value": "Number with factor",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "36.0-87.8, 88.8",
+                            "UDS4_value": "36.0-87.9, 88.8",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": 88.8,
+                            "UDS4_value": "88.8 = not assessed",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "HRATE",
+            "UDS4_variable": "HRATE",
+            "crosswalk_remappings": [
+                {
+                    "mapping_type": "UDS form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "B1",
+                            "UDS4_value": "B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": 4,
+                            "UDS4_value": 6,
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "4. Subject resting heart rate (pulse)",
+                            "UDS4_value": "6. Participant resting heart rate (pulse)",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Number with factor",
+                            "UDS4_value": "Number with factor",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "33-160, 888",
+                            "UDS4_value": "33-160, 888",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": 888,
+                            "UDS4_value": 888,
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": 888,
+                            "UDS4_value": "888 = Not assessed",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "PTID__B1",
+            "UDS4_variable": "PTID__B1",
+            "crosswalk_remappings": [
+                {
+                    "mapping_type": "UDS Form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "FORM_HEADER__B1",
+                            "UDS4_value": "FORM_HEADER__B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "H1",
+                            "UDS4_value": "H1",
+                            "reversible": "Yes",
+                            "note": "Imputed position numbers"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "ADC Subject ID__B1",
+                            "UDS4_value": "PTID__B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Character",
+                            "UDS4_value": "Character",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Any text or numbers with the exception of single quotes (‘), double quotes (“), ampersands (&), and percentage signs (%)",
+                            "UDS4_value": "Any text or numbers with the exception of single quotes (‘), double quotes (“), ampersands (&), and percentage signs (%)",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "VISITNUM__B1",
+            "UDS4_variable": "VISITNUM__B1",
+            "crosswalk_remappings": [
+                {
+                    "mapping_type": "UDS Form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "FORM_HEADER__B1",
+                            "UDS4_value": "FORM_HEADER__B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "H7",
+                            "UDS4_value": "H3",
+                            "reversible": "Yes",
+                            "note": "Imputed position numbers"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "ADC Visit #__B1",
+                            "UDS4_value": "ADC Visit ID__B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Entry integer",
+                            "UDS4_value": "Entry integer",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Non-negative",
+                            "UDS4_value": "Non-negative",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "WEIGHT",
+            "UDS4_variable": "WEIGHT",
+            "crosswalk_remappings": [
+                {
+                    "mapping_type": "UDS form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "B1",
+                            "UDS4_value": "B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": 2,
+                            "UDS4_value": 2,
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "2. Subject weight (lbs.)",
+                            "UDS4_value": "2. Participant weight (lbs.)",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Number with factor",
+                            "UDS4_value": "Number with factor",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "50-400, 888",
+                            "UDS4_value": "50-400, 888",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": 888,
+                            "UDS4_value": "888 = Not assessed",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "Conditional_Consistency": [
+        {
+            "UDS3_variable": "ADCID__B1",
+            "UDS4_variable": "ADCID__B1",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS Form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "FORM_HEADER__B1",
+                            "UDS4_value": "FORM_HEADER__B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "H3",
+                            "UDS4_value": "H2",
+                            "reversible": "Yes",
+                            "note": "Imputed position numbers"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Center ID__B1",
+                            "UDS4_value": "ADC name__B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Numeric factor",
+                            "UDS4_value": "Numeric factor",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "2-22, 25-28, 30-43",
+                            "UDS4_value": "2, 4, 6-16, 18-19, 21-22, 26-27, 30, 31, 33, 35, 37-43, 46-49, 65, 67- 68",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "2",
+                            "UDS4_value": "2",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "4",
+                            "UDS4_value": "4",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "6",
+                            "UDS4_value": "6",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "7",
+                            "UDS4_value": "7",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "8",
+                            "UDS4_value": "8",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "9",
+                            "UDS4_value": "9",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "10",
+                            "UDS4_value": "10",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "11",
+                            "UDS4_value": "11",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "12",
+                            "UDS4_value": "12",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "13",
+                            "UDS4_value": "13",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "14",
+                            "UDS4_value": "14",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "15",
+                            "UDS4_value": "15",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "16",
+                            "UDS4_value": "16",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "18",
+                            "UDS4_value": "18",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "19",
+                            "UDS4_value": "19",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "21",
+                            "UDS4_value": "21",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "22",
+                            "UDS4_value": "22",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "26",
+                            "UDS4_value": "26",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "27",
+                            "UDS4_value": "27",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "30",
+                            "UDS4_value": "30",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "31",
+                            "UDS4_value": "31",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "33",
+                            "UDS4_value": "33",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "35",
+                            "UDS4_value": "35",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "37",
+                            "UDS4_value": "37",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "38",
+                            "UDS4_value": "38",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "39",
+                            "UDS4_value": "39",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "40",
+                            "UDS4_value": "40",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "41",
+                            "UDS4_value": "41",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "42",
+                            "UDS4_value": "42",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "43",
+                            "UDS4_value": "43",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Boston University",
+                            "UDS4_value": "Boston University ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Columbia University",
+                            "UDS4_value": "Columbia University ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Emory University",
+                            "UDS4_value": "Emory University",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Massachusetts ADRC",
+                            "UDS4_value": "Massachusetts ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Indiana University",
+                            "UDS4_value": "Indiana University ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Johns Hopkins University",
+                            "UDS4_value": "Johns Hopkins ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Mayo Clinic",
+                            "UDS4_value": "Mayo Clinic ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Mount Sinai",
+                            "UDS4_value": "Mount Sinai School of Medicine ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "New York University",
+                            "UDS4_value": "NYU ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Northwestern University",
+                            "UDS4_value": "Northwestern ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Oregon Health & Science University",
+                            "UDS4_value": "Oregon Health and Science University",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Rush University",
+                            "UDS4_value": "Rush University Alzheimer's Disease Center",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "University of California",
+                            "UDS4_value": "UC Davis ADRC",
+                            "reversible": "Yes",
+                            "note": "Mapping to UDS4 requires response level (16)"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "University of California",
+                            "UDS4_value": "UCSD Shiley-Marcos ADRC",
+                            "reversible": "Yes",
+                            "note": "Mapping to UDS4 requires response level (18)"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "University of Kentucky",
+                            "UDS4_value": "University of Kentucky ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "University of Pennsylvania",
+                            "UDS4_value": "Penn ADRC / Penn Memory Center",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "University of Pittsburgh",
+                            "UDS4_value": "University of Pittsburgh ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "University of Washington",
+                            "UDS4_value": "University of Washington ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Washington University in Saint Louis",
+                            "UDS4_value": "Washington University Knight ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "University of Southern California",
+                            "UDS4_value": "USC ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "University of California",
+                            "UDS4_value": "UC Irvine",
+                            "reversible": "Yes",
+                            "note": "Mapping to UDS4 requires response level (31)"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Arizona ADC",
+                            "UDS4_value": "Arizona ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "University of California",
+                            "UDS4_value": "UCSF ADRC",
+                            "reversible": "Yes",
+                            "note": "Mapping to UDS4 requires response level (35)"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "University of Wisconsin",
+                            "UDS4_value": "Wisconsin ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "University of Kansas",
+                            "UDS4_value": "University of Kansas ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Stanford University #2",
+                            "UDS4_value": "Stanford ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Yale University",
+                            "UDS4_value": "Yale University ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Florida ADRC",
+                            "UDS4_value": "1Florida ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Wake Forest University",
+                            "UDS4_value": "Wake Forest University",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Univeristy of Michigan AD",
+                            "UDS4_value": "University of Michigan ADRC",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "B1NOT",
+            "UDS4_variable": "B1NOT",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS Form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Z1X",
+                            "UDS4_value": "B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "6c",
+                            "UDS4_value": "0d1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "6c. If B1 not submitted, specify reason. (see KEY)",
+                            "UDS4_value": "0d1. If 'B1 Evaluation Form: Physical' not submitted, specify reason",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Numeric factor",
+                            "UDS4_value": "Numeric factor",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "95-98",
+                            "UDS4_value": "95-98",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "95",
+                            "UDS4_value": "95",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "96",
+                            "UDS4_value": "96",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "97",
+                            "UDS4_value": "97",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "98",
+                            "UDS4_value": "98",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "95 Physical problem",
+                            "UDS4_value": "Physical problem",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "96 Cognitive/behavior problem",
+                            "UDS4_value": "Cognitive/behavioral problem",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "97 Other problem",
+                            "UDS4_value": "Other",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "98 Verbal refusal",
+                            "UDS4_value": "Verbal refusal",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "FORMVER__B1",
+            "UDS4_variable": "FORMVER__B1",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS Form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "FORM_HEADER__B1",
+                            "UDS4_value": "FORM_HEADER__B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "H2",
+                            "UDS4_value": "H5",
+                            "reversible": "Yes",
+                            "note": "Imputed position numbers"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Form Version Number__B1",
+                            "UDS4_value": "Form version number__B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Numeric factor",
+                            "UDS4_value": "Numeric factor",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "3, 3.1",
+                            "UDS4_value": "3-4",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "3",
+                            "UDS4_value": "3",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "3",
+                            "UDS4_value": "3",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "INITIALS__B1",
+            "UDS4_variable": "INITIALSB1",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS Form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "FORM_HEADER__B1",
+                            "UDS4_value": "B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "H8",
+                            "UDS4_value": "0b",
+                            "reversible": "Yes",
+                            "note": "Imputed position numbers UDS3"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Examiner's initials (xxx)__B1",
+                            "UDS4_value": "0b. B1 Evaluation Form: Physical - Examiner's initials",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Character",
+                            "UDS4_value": "Character",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Any text or numbers with the exception of single quotes (‘), double quotes (“), ampersands (&), and percentage signs (%)",
+                            "UDS4_value": "Any text or numbers with the exception of single quotes (‘), double quotes (“), ampersands (&), and percentage signs (%)",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "LANGB1",
+            "UDS4_variable": "LANGB1",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS Form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Z1X",
+                            "UDS4_value": "B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "6a",
+                            "UDS4_value": "0c",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "6a. Language used for B1 Evaluation Form: Physical",
+                            "UDS4_value": "0c. B1 Evaluation Form: Physical - Language",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Numeric factor",
+                            "UDS4_value": "Numeric factor",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1-2",
+                            "UDS4_value": "1-2",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1",
+                            "UDS4_value": "1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "2",
+                            "UDS4_value": "2",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1 English",
+                            "UDS4_value": "English",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "2 Spanish",
+                            "UDS4_value": "Spanish",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "Structured_Transformations": [
+        {
+            "UDS3_variable": "B1SUB",
+            "UDS4_variable": "MODEB1",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS Form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Z1X",
+                            "UDS4_value": "B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "6b",
+                            "UDS4_value": "0d",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "6b. Submitted B1 EVALUATION FORM - Physical",
+                            "UDS4_value": "0d. B1 Evaluation Form: Physical - In-person, remote, or not completed?",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Numeric factor",
+                            "UDS4_value": "Numeric factor",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "0-1",
+                            "UDS4_value": "1-3",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "0",
+                            "UDS4_value": "0",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "No",
+                            "UDS4_value": "Not completed",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "TELCOG & TELILL & TELHOME & TELREFU & TELOTHR",
+            "UDS4_variable": "MODEB1",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "Structured mapping",
+                    "mappings": [
+                        {
+                            "UDS3_value": "0 & 0 & 0 & 0 & 0",
+                            "UDS4_value": "1",
+                            "reversible": "Yes",
+                            "note": "UDS3 T1 specific structured mapping"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "VISITMO__B1 & VISITDAY__B1 & VISITYR__B1",
+            "UDS4_variable": "FRMDATEB1",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS Form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "FORM_HEADER__B1",
+                            "UDS4_value": "B1",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "H4 & H5 & H6",
+                            "UDS4_value": "0a",
+                            "reversible": "Yes",
+                            "note": "Imputed position numbers UDS3"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "B1 Evaluation Form: Physical__Form date – month & B1 Evaluation Form: Physical__Form date – day & B1 Evaluation Form: Physical__Form date – year",
+                            "UDS4_value": "0a. B1 Evaluation Form: Physical - Form date",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Entry integer & Entry integer & Entry integer",
+                            "UDS4_value": "Date",
+                            "reversible": "Yes",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1-12 & 1-31 & 2005-present year",
+                            "UDS4_value": "After 9/1/2005",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Structured mapping",
+                    "mappings": [
+                        {
+                            "UDS3_value": "strplit(FRMDATEB1, \"/\")",
+                            "UDS4_value": "paste(VISITMO__B1, \"/\", VISITDAY_B1, \"/\", VISITYR_B1)",
+                            "reversible": "Yes",
+                            "note": "Structured mapping presented as R expression"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "High_Complexity": [
+        {
+            "UDS3_variable": "BPDIASL | BPDIAS",
+            "UDS4_variable": "BPDIASL1",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "B1a | B1",
+                            "UDS4_value": "B1",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASL over B1 BPDIAS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1a2 | 3b",
+                            "UDS4_value": "5a1b",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASL over B1 BPDIAS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Subject blood pressure – left arm, diastolic | 3b. Subject blood pressure at initial reading (sitting), diastolic",
+                            "UDS4_value": "5a1b. Participant blood pressure - Left arm: Diastolic Reading 1",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASL over B1 BPDIAS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Number with factor | Number with factor",
+                            "UDS4_value": "Number with factor",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASL over B1 BPDIAS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "30-140, 888 | 30-140, 888",
+                            "UDS4_value": "30-140, 888",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASL over B1 BPDIAS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "888 | 888",
+                            "UDS4_value": 888,
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASL over B1 BPDIAS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Not assessed | Not assessed",
+                            "UDS4_value": "888 = Not assessed",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASL over B1 BPDIAS"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "BPDIASR | BPDIAS",
+            "UDS4_variable": "BPDIASR1",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "B1a | B1",
+                            "UDS4_value": "B1",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASR over B1 BPDIAS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1b2 | 3b",
+                            "UDS4_value": "5b1b",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASR over B1 BPDIAS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Subject blood pressure – right arm, diastolic | 3b. Subject blood pressure at initial reading (sitting), diastolic",
+                            "UDS4_value": "5b1b. Participant blood pressure - Right arm: Diastolic Reading 1",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASR over B1 BPDIAS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Number with factor | Number with factor",
+                            "UDS4_value": "Number with factor",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASR over B1 BPDIAS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "30-140, 888 | 30-140, 888",
+                            "UDS4_value": "30-140, 888",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASR over B1 BPDIAS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "888 | 888",
+                            "UDS4_value": 888,
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASR over B1 BPDIAS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Not assessed | Not assessed",
+                            "UDS4_value": "888 = Not assessed",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPDIASR over B1 BPDIAS"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "BPSYSL | BPSYS",
+            "UDS4_variable": "BPSYSL1",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "B1a | B1",
+                            "UDS4_value": "B1",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSL over B1 BPSYS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1a1 | 3a",
+                            "UDS4_value": "5a1a",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSL over B1 BPSYS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Subject blood pressure – left arm, systolic | 3a. Subject blood pressure at initial reading (sitting), systolic",
+                            "UDS4_value": "5a1a. Participant blood pressure - Left arm: Systolic Reading 1",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSL over B1 BPSYS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Number with factor | Number with factor",
+                            "UDS4_value": "Number with factor",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSL over B1 BPSYS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "70-230, 888 | 70-230, 888",
+                            "UDS4_value": "70-230, 888",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSL over B1 BPSYS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "888 | 888",
+                            "UDS4_value": 888,
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSL over B1 BPSYS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Not assessed | Not assessed",
+                            "UDS4_value": "888 = Not assessed",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSL over B1 BPSYS"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "BPSYSR | BPSYS",
+            "UDS4_variable": "BPSYSR1",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "B1a | B1",
+                            "UDS4_value": "B1",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSR over B1 BPSYS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1b1 | 3a",
+                            "UDS4_value": "5b1a",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSR over B1 BPSYS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Subject blood pressure – right arm, systolic | 3a. Subject blood pressure at initial reading (sitting), systolic",
+                            "UDS4_value": "5b1a. Participant blood pressure - Right arm: Systolic Reading 1",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSR over B1 BPSYS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Number with factor | Number with factor",
+                            "UDS4_value": "Number with factor",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSR over B1 BPSYS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "70-230, 888 | 70-230, 888",
+                            "UDS4_value": "70-230, 888",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSR over B1 BPSYS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "888 | 888",
+                            "UDS4_value": 888,
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSR over B1 BPSYS"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Not assessed | Not assessed",
+                            "UDS4_value": "888 = Not assessed",
+                            "reversible": "Yes",
+                            "note": "Prioritize B1a BPSYSR over B1 BPSYS"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "PACKET__B1",
+            "UDS4_variable": "PACKET__B1",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS Form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "FORM_HEADER__B1",
+                            "UDS4_value": "FORM_HEADER__B1",
+                            "reversible": "Yes",
+                            "note": "UDS3 PACKET__B1 in DED RDD only"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "H0",
+                            "UDS4_value": "H4",
+                            "reversible": "Yes",
+                            "note": "UDS3 PACKET__B1 in DED RDD only; Imputed position numbers"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Packet code__B1",
+                            "UDS4_value": "Packet Code__B1",
+                            "reversible": "Yes",
+                            "note": "UDS3 PACKET__B1 in DED RDD only"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Character",
+                            "UDS4_value": "Character factor",
+                            "reversible": "Yes",
+                            "note": "UDS3 PACKET__B1 in DED RDD only"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "I, F, TI, T",
+                            "UDS4_value": "I, F, T",
+                            "reversible": "NA",
+                            "note": "UDS3 PACKET__B1 in DED RDD only"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "I",
+                            "UDS4_value": "I",
+                            "reversible": "Yes",
+                            "note": "UDS3 PACKET__B1 in DED RDD only"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "F",
+                            "UDS4_value": "F",
+                            "reversible": "Yes",
+                            "note": "UDS3 PACKET__B1 in DED RDD only"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "T",
+                            "UDS4_value": "T",
+                            "reversible": "Yes",
+                            "note": "UDS3 PACKET__B1 in DED RDD only"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Initial Visit Packet",
+                            "UDS4_value": "Initial Visit Packet",
+                            "reversible": "Yes",
+                            "note": "UDS3 PACKET__B1 in DED RDD only"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Follow-up Visit Packet",
+                            "UDS4_value": "Follow-up Visit Packet",
+                            "reversible": "Yes",
+                            "note": "UDS3 PACKET__B1 in DED RDD only"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Telephone Visit Packet",
+                            "UDS4_value": "Telephone Visit Packet",
+                            "reversible": "Yes",
+                            "note": "UDS3 PACKET__B1 in DED RDD only"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
