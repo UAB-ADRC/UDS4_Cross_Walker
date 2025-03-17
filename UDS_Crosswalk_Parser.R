@@ -65,9 +65,16 @@ process_repeating_variables <- function(uds3_var, uds4_var, uds3_df, uds4_df, re
     if (!is.null(response_map)) {
       # Create mapping for values
       col_values <- as.character(uds3_df[[new_uds3_col]])
+      
       mapped_values <- sapply(col_values, function(val) {
-        response_map[[val]] %||% val
+        # Check if val exists in response_map
+        if (val %in% names(response_map)) {
+          return(response_map[[val]])
+        } else {
+          return(val)  # If not found, return the original value
+        }
       })
+
       
       # Handle unmatched values
       if (!endsWith(new_uds4_col, "tpr")) {
@@ -97,7 +104,6 @@ process_mappings <- function(mapping_data, mapping_type) {
     # Extract and normalize UDS3 and UDS4 variable names
     uds3_var <- tolower(mapping$UDS3_variable)
     uds4_var <- tolower(mapping$UDS4_variable)
-    print(uds4_var)
     
     # Resolve UDS3 variable names using data dictionary
     uds3_var <- data_dict[[uds3_var]] %||% uds3_var
@@ -138,6 +144,7 @@ process_mappings <- function(mapping_data, mapping_type) {
     
     # Case 1: Response levels and no conformity
     if (length(response_levels) > 0 && length(conformity) == 0 && uds3_var %in% colnames(uds3_df)) {
+      print(uds4_var)
       # Create response map
       response_map <- setNames(
         sapply(response_levels, function(mapping) sapply(mapping$mappings, function(item) item$UDS4_value)),
@@ -150,20 +157,22 @@ process_mappings <- function(mapping_data, mapping_type) {
         
         if (!grepl("\\|", uds3_value) && !grepl("grep\\(", uds3_value)) {
           if (uds4_var %in% colnames(uds4_df)) {
+            # Find rows where 'uds4_var' is NA in 'uds4_df'
             stm <- is.na(uds4_df[[uds4_var]])
-            # Changed with respect to R
-            update_rows<- stm & (as.character(uds3_df[[uds3_var]]) == uds3_value)
-            uds4_df[update_rows,uds4_var]<-uds4_value
-            #uds4_df[stm & as.character(uds3_df[[uds3_var]]) == uds3_value, uds4_var] <- uds4_value
-          
-            } else {
             
-            #uds4_df[as.character(uds3_df[[uds3_var]]) == uds3_value, uds4_var] <- uds4_value
+            # Create the condition for matching values in 'uds3_df' and 'uds3_value'
+            update_rows <- stm & (as.character(uds3_df[[uds3_var]]) == uds3_value)
+        
+            # Perform the assignment where the condition is TRUE
+            uds4_df[!is.na(update_rows), uds4_var] <- uds4_value
+          }
+          else {
             # Replace only where condition is TRUE (excluding NAs)
             uds4_df[!is.na(uds3_df[[uds3_var]]) & as.character(uds3_df[[uds3_var]]) == uds3_value, uds4_var] <- uds4_value
           }
         }
       }
+      
     }
     # Case 2: Structured mappings
     else if (length(structured_mappings) > 0) {
@@ -219,9 +228,10 @@ process_mappings <- function(mapping_data, mapping_type) {
                   }
                 }
               }
+             
               
               # Apply transformation
-              uds4_df[condition, uds4_var] <- uds4_val
+              uds4_df[!is.na(condition), uds4_var] <- uds4_val
             }
           }
           
@@ -259,15 +269,20 @@ process_mappings <- function(mapping_data, mapping_type) {
               # Update where conditions match
               if (uds4_var %in% colnames(uds4_df)) {
                 missing_mask <- is.na(uds4_df[[uds4_var]])
-                uds4_df[missing_mask & mask, uds4_var] <- as.numeric(uds4_value)
+                rows_effect <- missing_mask & mask
+                rows_effect<-!is.na(rows_effect)
+                
+                uds4_df[rows_effect, uds4_var] <- as.numeric(uds4_value)
+                
+                
               } else {
-                print(uds4_var)
+                
                 uds4_df[!is.na(uds3_df[[uds3_var]]) & mask, uds4_var] <- uds4_value
               }
             }
           } else {
             # Handle structured mathematical mappings
-            if (any(grepl("[+\\-*/]", uds3_value))) {
+            if (any(grepl("[\\+\\-\\*/]", uds3_value))){
               uds3_cols <- str_extract_all(uds4_value, "[A-Za-z0-9_]+") %>% unlist() %>% tolower()
               
               # Check if UDS4 variable exists in struct_map1
@@ -404,8 +419,16 @@ process_mappings <- function(mapping_data, mapping_type) {
           uds3_vars <- tolower(cols[-1])
           
           if (all(uds3_vars %in% colnames(uds3_df))) {
-            uds4_df[[uds4_var]] <- apply(uds3_df[, uds3_vars, drop = FALSE], 1, max, na.rm = TRUE)
+            uds4_df[[uds4_var]] <- apply(uds3_df[, uds3_vars, drop = FALSE], 1, function(row) {
+              # Check if all values are NA in the row
+              if (all(is.na(row))) {
+                return(NA)  # Return NA 
+              } else {
+                return(max(row, na.rm = TRUE))  # Return max value ignoring NA
+              }
+            })
           }
+          
         } else if (uds3_var %in% colnames(uds3_df)) {
           if (uds4_var %in% colnames(uds4_df)) {
             mask <- is.na(uds4_df[[uds4_var]])
@@ -433,26 +456,39 @@ process_mappings <- function(mapping_data, mapping_type) {
               # Handle float type
               if (is.numeric(uds3_df[[uds3_var]])) {
                 float_uds3_value <- as.numeric(uds3_value)
-                #uds4_df[uds3_df[[uds3_var]] == float_uds3_value, uds4_var] <- uds4_value
+                
+                # cATCH For tremrest type of columns if no strucutred mappings
+                if(is.na(float_uds3_value)){
+                  # do nothing
+                
+                  }
+                
+                else{
                 uds4_df[!is.na(uds3_df[[uds3_var]]) & uds3_df[[uds3_var]] == float_uds3_value, uds4_var] <- uds4_value
-              } else if (uds3_value == 'None') {
+                }
+                
+              } else if (is.null(uds3_value)) {
                 uds4_df[is.na(uds3_df[[uds3_var]]), uds4_var] <- uds4_value
               } else {
-                
-                uds4_df[as.character(uds3_df[[uds3_var]]) == uds3_value, uds4_var] <- uds4_value
+                uds4_df[!is.na(uds3_df[[uds3_var]])& as.character(uds3_df[[uds3_var]]) == uds3_value, uds4_var] <- uds4_value
               }
             } else {
-
               # Skip columns with names ending in "sec" or "ter" (those are not mapped)
               if (!(endsWith(uds3_var, "sec") || endsWith(uds3_var, "ter"))) {
-                # Handle cases with logical OR conditions (e.g., "1 | 3 | 4 | 5 | 50 | 99" -> None)
+                # Handle cases with logical OR conditions (e.g., "0 | 9" -> NA or corresponding UDS4 value)
                 values <- strsplit(uds3_value, " \\| ")[[1]]  # Split values by " | " separator
+                
                 
                 # Check if uds4_value is NULL/NA and handle accordingly
                 if (is.null(uds4_value) || length(uds4_value) == 0 || (is.character(uds4_value) && uds4_value == "NULL")) {
+                  # Handle the case for mapping values to NA if uds4_value is NULL/NA
                   uds4_df[as.character(uds3_df[[uds3_var]]) %in% values, uds4_var] <- NA
                 } else {
-                  uds4_df[as.character(uds3_df[[uds3_var]]) %in% values, uds4_var] <- uds4_value
+                  # Fix issue with multiple values by assigning the correct uds4_value to the subset of uds3_value
+                  for (val in values) {
+                    # Check if a valid mapping exists for the individual value
+                    uds4_df[!is.na(uds3_df[[uds3_var]])& as.character(uds3_df[[uds3_var]]) == val, uds4_var] <- uds4_value
+                  }
                 }
               }
             }
@@ -624,7 +660,9 @@ a3_list <- c('sib###yob', 'sib###agd', 'sib###pdx', 'kid###yob', 'kid###agd', 'k
 ########################### Main Process #############################################
 
 # Load UDS3 data
-uds3_data_path<-"C:/Users/jaiga/Downloads/Final_parsing/final_uds3.csv"
+#uds3_data_path<-"C:/Users/jnagidi/Downloads/final_uds3.csv"
+
+uds3_data_path<-"C:/Users/jnagidi/Downloads/UDS3Mod_for_Jai_Crosswalk_Levels_only.csv"
 nacc <- read_csv(uds3_data_path)
 cat(sprintf("UDS3_data has %d rows and %d columns\n", nrow(nacc), ncol(nacc)))
 
