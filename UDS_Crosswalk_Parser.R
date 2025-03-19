@@ -510,31 +510,29 @@ process_mappings <- function(mapping_data, mapping_type) {
             }
           }
           
-          # # If the mapping type is not 'Structured_Transformations' or 'High_Complexity', preserve non-mapped values
-          # if (!mapping_type %in% c('Structured_Transformations', 'High_Complexity')) {
-          #   
-          #   # Ensure response_map exists and relevant columns are present
-          #   if (length(response_map) > 0 && uds3_var %in% colnames(uds3_df) && uds4_var %in% colnames(uds4_df)) {
-          #     
-          #     # Check if uds3_value contains complex expressions
-          #     if (!grepl("grep\\(", uds3_value) && (!grepl("(ter|sec)$", uds3_var)))  {
-          #       
-          #       # Identify rows where uds4_var is NOT in response_map values
-          #       not_mapped <- is.na(uds4_df[[uds4_var]]) | !uds4_df[[uds4_var]] %in% unlist(response_map)
-          #       
-          #       # Ensure we only update if the uds3_value itself is NOT in response_map
-          #       valid_updates <- not_mapped & !uds3_df[[uds3_var]] %in% unlist(response_map)
-          #       
-          #       # Assign values ONLY for valid rows
-          #       uds4_df[[uds4_var]][valid_updates] <- as.character(uds3_df[[uds3_var]][valid_updates])
-          #       
-          #     }
-          #   }
-          # }
-          
-          
+          # If the mapping type is not 'Structured_Transformations' or 'High_Complexity', preserve non-mapped values
+          if (!mapping_type %in% c('Structured_Transformations', 'High_Complexity')) {
 
-                    
+
+            # Ensure response_map exists and relevant columns are present
+            if (length(response_map) > 0) {
+
+              # Check if uds3_value contains complex expressions
+              if (!grepl("grep\\(", uds3_value))  {
+                
+                # Convert "NULL" strings in response_map to NA
+                response_map[response_map == "NULL"] <- NA_character_
+                
+                # Convert uds3_var column to character
+                uds3_df[[uds3_var]] <- as.character(uds3_df[[uds3_var]])
+                
+                # Replace values in uds4_df where uds4_var is not in response_map values
+                uds4_df[[uds4_var]][!(uds4_df[[uds4_var]] %in% response_map)] <- uds3_df[[uds3_var]]
+
+              }
+            }
+          }
+                      
         }
       }
     }
@@ -568,7 +566,6 @@ process_all_jsons <- function(directory) {
   return(uds4_df)  # Return the final uds4_df
 }
 
-
 # Function to replace NaN with NA
 replace_nan_and_na <- function(df) {
   df %>% 
@@ -592,7 +589,6 @@ data_crosscheck <- function(uds4_df) {
   
   return(uds4_df)
 }
-
 
 # Function to process and save data
 process_and_save_data <- function(file_path, final_df, output_file) {
@@ -652,7 +648,7 @@ a3_stop_dict <- list(
 for (i in 1:15) {
   a3_stop_dict[[paste0('kid', i, 'etpr')]] <- c(
     paste0('kid', i, 'meval'), 
-    paste0('kid', i, 'age')
+    paste0('kid', i, 'ago')
   )
 }
 
@@ -660,7 +656,7 @@ for (i in 1:15) {
 for (i in 1:20) {
   a3_stop_dict[[paste0('sib', i, 'etpr')]] <- c(
     paste0('sib', i, 'meval'), 
-    paste0('sib', i, 'age')
+    paste0('sib', i, 'ago')
   )
 }
 
@@ -680,9 +676,9 @@ a3_list <- c('sib###yob', 'sib###agd', 'sib###pdx', 'kid###yob', 'kid###agd', 'k
 ########################### Main Process #############################################
 
 # Load UDS3 data
-#uds3_data_path<-"C:/Users/jaiga/Downloads/Final_parsing/final_uds3.csv"
+uds3_data_path<-"C:/Users/jaiga/Downloads/Final_parsing/final_uds3.csv"
 
-uds3_data_path<-"UDS3Mod_for_Jai_Crosswalk_Levels_only.csv"
+#uds3_data_path<-"UDS3Mod_for_Jai_Crosswalk_Levels_only.csv"
 nacc <- read_csv(uds3_data_path)
 cat(sprintf("UDS3_data has %d rows and %d columns\n", nrow(nacc), ncol(nacc)))
 
