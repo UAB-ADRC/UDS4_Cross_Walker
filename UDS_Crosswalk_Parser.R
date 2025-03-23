@@ -1,4 +1,5 @@
 # UDS Crosswalk Parser - R Version
+
 # Libraries needed
 library(jsonlite)
 library(dplyr)
@@ -272,59 +273,76 @@ process_mappings <- function(mapping_data, mapping_type) {
                 rows_effect <- missing_mask & mask  # Corrected filtering
                 
                 uds4_df[rows_effect, uds4_var] <- as.numeric(uds4_value)
+                
               } else {
                 uds4_df[mask, uds4_var] <- uds4_value
               }
             }
           }
           else {
-            # Handle structured mathematical mappings
+            # Handling structured mathematical mappings (e.g., "PDAGE + BIRTHYR" → "PDYR - BIRTHYR")
             if (any(grepl("[\\+\\-\\*/]", uds3_value))) {
-              uds3_cols <- str_extract_all(uds4_value, "\\b\\w+\\b") %>% unlist() %>% tolower()
               
-              # Check if UDS4 variable exists in struct_map1
+              uds3_cols <- tolower(unlist(str_extract_all(uds4_value, "[A-Za-z0-9_]+")))
+              
+              # Check if the UDS4 variable exists in struct_map1
               if (uds4_var %in% names(struct_map1)) {
                 struct_col <- struct_map1[[uds4_var]]
                 
-                # Ensure struct_col exists and filter non-zero rows
+                # Ensure struct_col exists in uds3_df and filter out rows where it's non-zero
                 if (struct_col %in% colnames(uds3_df)) {
-                  non_zero_mask <- !is.na(uds3_df[[struct_col]]) & uds3_df[[struct_col]] != 0
+                  non_zero_mask <- uds3_df[[struct_col]] != 0 & !is.na(uds3_df[[struct_col]])
                   
-                  if (any(non_zero_mask)) {
-                    # Ensure all columns exist
+                  if (any(non_zero_mask)) {  # Proceed only if there's at least one non-zero value
+                    # Ensure all columns exist before computing
                     if (all(uds3_cols %in% colnames(uds3_df))) {
-                      # Replace the UDS4 expression with R code
-                      uds3_expr <- gsub("–", "-", trimws(tolower(uds4_value)))
-                      
-                      # Create a data frame subset for non-zero rows
+                      # Create a subset of the non-zero rows
                       subset_df <- uds3_df[non_zero_mask, , drop = FALSE]
                       
-                      # Prepare environment for evaluation
-                      env <- new.env()
+                      # Replace the UDS4 expression with UDS3 column values
+                      uds3_expr <- gsub("–", "-", trimws(tolower(uds4_value)))
+                      
                       for (col in uds3_cols) {
-                        env[[col]] <- subset_df[[col]]
+                        uds3_expr <- gsub(col, paste0("subset_df[['", col, "']]"), uds3_expr, fixed = TRUE)
                       }
                       
-                      # Evaluate expression
-                      tryCatch({
-                        uds3_computed <- eval(parse(text = uds3_expr), envir = env)
-                        
-                        # Ensure valid results
-                        lev_mask <- !is.na(uds3_df[[uds3_var]]) & uds3_df[[uds3_var]] != 9999
-                        uds4_df[lev_mask & non_zero_mask, uds4_var] <- as.integer(uds3_computed)
+                      # Evaluate the mathematical expression
+                      uds3_computed <- tryCatch({
+                        eval(parse(text = uds3_expr), envir = list(subset_df = subset_df))
+                      }, error = function(e) {
+                        warning(sprintf("Error evaluating UDS3 expression '%s': %s", uds3_expr, e$message))
+                        NULL
+                      })
+                      
+                      # Assign computed values to uds4_df if evaluation was successful
+                      if (!is.null(uds3_computed)) {
+                        # Ensure uds3_computed length matches the number of rows
+                        expected_length <- sum(non_zero_mask)
+                        if (length(uds3_computed) == expected_length) {
+                          
+                          #lev_mask <- uds3_df[[uds3_var]] != 9999 & !is.na(uds3_df[[uds3_var]])
+                          lev_mask <- !is.na(uds3_df[[uds3_var]])
+                          update_indices <- which(lev_mask & non_zero_mask)
+                       
+                          uds3_computed <- uds3_computed[!is.na(uds3_computed)]
+                          
+                          uds4_df[update_indices, uds4_var] <- as.integer(uds3_computed)
+                        } else {
+                          warning(sprintf("Mismatch: uds3_computed has %d values, expected %d", length(uds3_computed), expected_length))
+                        }
                         
                         # Replace rows where uds3_var is 9999 with 999
                         replace_mask <- !is.na(uds3_df[[uds3_var]]) & uds3_df[[uds3_var]] == 9999
                         uds4_df[replace_mask, uds4_var] <- 999
-                      }, error = function(e) {
-                        warning(sprintf("Error evaluating UDS3 expression '%s': %s", uds3_expr, e$message))
-                      })
+
+                      }
                     }
                   }
                 }
               }
             }
           }
+          
           
           # Handle paste() function
           if (grepl("paste\\(", uds4_value)) {
@@ -509,16 +527,16 @@ process_mappings <- function(mapping_data, mapping_type) {
               uds4_df[matches, uds4_var] <- response_map[[uds3_value]]
             }
           }
-          
+
           # If the mapping type is not 'Structured_Transformations' or 'High_Complexity', preserve non-mapped values
+          
           if (!mapping_type %in% c('Structured_Transformations', 'High_Complexity')) {
-
-
+            
             # Ensure response_map exists and relevant columns are present
             if (length(response_map) > 0) {
-
+              
               # Check if uds3_value contains complex expressions
-              if (!grepl("grep\\(", uds3_value))  {
+              if (!grepl("grep\\(", uds3_value)) {
                 
                 # Convert "NULL" strings in response_map to NA
                 response_map[response_map == "NULL"] <- NA_character_
@@ -526,13 +544,13 @@ process_mappings <- function(mapping_data, mapping_type) {
                 # Convert uds3_var column to character
                 uds3_df[[uds3_var]] <- as.character(uds3_df[[uds3_var]])
                 
-                # Replace values in uds4_df where uds4_var is not in response_map values
-                uds4_df[[uds4_var]][!(uds4_df[[uds4_var]] %in% response_map)] <- uds3_df[[uds3_var]]
-
+                # Assign values from uds3_df to uds4_df where they are not mapped
+                uds4_df[[uds4_var]][!(uds4_df[[uds4_var]] %in% response_map)] <- 
+                  uds3_df[[uds3_var]][seq_len(sum(!(uds4_df[[uds4_var]] %in% response_map)))]
               }
             }
           }
-                      
+                    
         }
       }
     }
@@ -566,6 +584,7 @@ process_all_jsons <- function(directory) {
   return(uds4_df)  # Return the final uds4_df
 }
 
+
 # Function to replace NaN with NA
 replace_nan_and_na <- function(df) {
   df %>% 
@@ -589,6 +608,7 @@ data_crosscheck <- function(uds4_df) {
   
   return(uds4_df)
 }
+
 
 # Function to process and save data
 process_and_save_data <- function(file_path, final_df, output_file) {
@@ -663,15 +683,16 @@ for (i in 1:20) {
 # Define struct_map1
 struct_map1 <- list(
   hrtattage = 'cvhatt',
-  strokage = 'cbstroke',
   pdage = 'pd',
   lasttbi = 'tbi',
   pdothrage = 'pdothr',
-  tiaage = 'cbtia'
+  tiaage = 'cbtia',
+  strokage = 'cbstroke'
 )
 
 # Define a3_list
-a3_list <- c('sib###yob', 'sib###agd', 'sib###pdx', 'kid###yob', 'kid###agd', 'kid###pdx')
+a3_list <- c('sib###yob', 'sib###agd', 'sib###pdx','sib###ago','sib###moe', 
+             'kid###yob', 'kid###agd', 'kid###pdx','kid###ago','kid###moe')
 
 ########################### Main Process #############################################
 
