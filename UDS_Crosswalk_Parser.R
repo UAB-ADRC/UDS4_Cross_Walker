@@ -544,9 +544,11 @@ process_mappings <- function(mapping_data, mapping_type) {
                 # Convert uds3_var column to character
                 uds3_df[[uds3_var]] <- as.character(uds3_df[[uds3_var]])
                 
-                # Assign values from uds3_df to uds4_df where they are not mapped
-                uds4_df[[uds4_var]][!(uds4_df[[uds4_var]] %in% response_map)] <- 
-                  uds3_df[[uds3_var]][seq_len(sum(!(uds4_df[[uds4_var]] %in% response_map)))]
+                # Identify indices where uds4_df values are NOT in response_map
+                missing_indices <- which(!(uds4_df[[uds4_var]] %in% unname(response_map)))
+                
+                # Ensure the replacement matches the correct indices
+                uds4_df[[uds4_var]][missing_indices] <- uds3_df[[uds3_var]][missing_indices]
               }
             }
           }
