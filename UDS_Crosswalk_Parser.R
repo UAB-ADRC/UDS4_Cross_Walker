@@ -1,5 +1,11 @@
 # UDS Crosswalk Parser - R Version
 
+#Check and install libraries
+lib_list <- c("jsonlite", "dplyr", "stringr", "readr")
+new_libs <- lib_list[!(lib_list %in% install.packages()[,"Package"])]
+if(length(new_libs)>0) install.packages(new_libs)
+
+
 # Libraries needed
 library(jsonlite)
 library(dplyr)
@@ -9,17 +15,19 @@ library(readr)
 # Suppress warnings
 options(warn = -1)
 
-# # Command line arguments handling
-# args <- commandArgs(trailingOnly = TRUE)
-# if (length(args) > 2) {
-#   # Inputs -- 1. UDS3 Recap Data path, 2.Json Crosswalk folder path, 3. UDS3_Data_Elements_list
-#   uds3_data_path <- args[1]
-#   json_folder_path <- args[2]
-#   data_order_path <- args[3]
-# } else {
-#   cat("Please Provide the UDS3_data, Json Crosswalk Folder and Data Order paths\n")
-#   quit(save = "no", status = 1)
-# }
+# Command line arguments handling
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) > 2) {
+  # Inputs -- 1. UDS3 Recap Data path, 2.Json Crosswalk folder path, 3. UDS3_Data_Elements_list
+  uds3_data_path <- args[1]
+  json_folder_path <- args[2]
+  data_order_path <- args[3]
+} else if(interactive()) {
+  print("Running interactively, be sure to update paths in Main Process section")
+} else{
+  cat("Please Provide the UDS3_data, Json Crosswalk Folder and Data Order paths\n")
+  quit(save = "no", status = 1)
+}
 
 # Function to load JSON files
 load_json_files <- function(directory) {
@@ -698,10 +706,17 @@ a3_list <- c('sib###yob', 'sib###agd', 'sib###pdx','sib###ago','sib###moe',
 
 ########################### Main Process #############################################
 
-# Load UDS3 data
-uds3_data_path<-"C:/Users/jaiga/Downloads/Final_parsing/final_uds3.csv"
+# Loading files and folders manually if not running from command line
+.order_path <- .json_path <- .uds3_path <- NULL
+if(is.null(uds3_data_path))  uds3_data_path <- .uds3_path
+if(is.null(json_folder_path)) json_folder_path <- .json_path
+if(is.null(data_order_path)) data_order_path <- .order_path
+if(is.null(uds3_data_path) || is.null(json_folder_path) || is.null(data_order_path)) {
+  cat("Folder paths missing, check command line arguments or provide paths at beginning of main process")
+  quit(save = "no", status = 1)
+}
 
-#uds3_data_path<-"UDS3Mod_for_Jai_Crosswalk_Levels_only.csv"
+#Load UDS3 data
 nacc <- read_csv(uds3_data_path)
 cat(sprintf("UDS3_data has %d rows and %d columns\n", nrow(nacc), ncol(nacc)))
 
@@ -740,9 +755,6 @@ for (col in float_columns) {
 }
 
 
-#json_folder_path<-"./Crosswalk"
-json_folder_path<-"C:/Users/jaiga/Downloads/Final_parsing/crosswalks"
-
 # Initialize uds4_df properly
 uds4_df <- data.frame(matrix(NA, nrow = nrow(uds3_df), ncol = 0))
 row.names(uds4_df) <- 1:nrow(uds3_df)
@@ -758,8 +770,6 @@ uds4_df <- data_crosscheck(uds4_df)
 
 # Preserving the appropriate data
 final_df <- replace_nan_and_na(uds4_df)
-
-data_order_path<-"UDS4Data_ColumnOrder.txt"
 
 process_and_save_data(
   data_order_path, 
