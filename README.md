@@ -35,7 +35,7 @@ python UDS_Crosswalk_Parser.py <path to UDS3 CSV> <path to folder of JSON files>
 ```bash
 Rscript UDS_Crosswalk_Parser.R <path to UDS3 CSV> <path to folder of JSON files> <path to UDS4 order txt>
 ```
-  
+
 The two scripts can also be run directly from within a Jupyter notebook or Rstudio environment.  Be sure to initialize the string paths to the files / folders within the Main Process sections as needed.
 
 
