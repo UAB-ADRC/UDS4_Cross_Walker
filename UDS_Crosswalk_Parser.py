@@ -5,6 +5,7 @@ import rdata
 import warnings
 import pandas as pd
 import numpy as np
+import io
 from bs4 import BeautifulSoup
 
 # Ignore all warnings
@@ -14,6 +15,8 @@ warnings.filterwarnings("ignore")
 if len(sys.argv) > 3:
 	# Inputs -- 1. UDS3 Recap Data path, 2.Json Crosswalk folder path, 3. UDS3_Data_Elements_list
     uds3_data_path, json_folder_path, data_order_path = sys.argv[1],sys.argv[2],sys.argv[3]
+elif sys.stdin and sys.stdin.isatty(): 
+  print("Running interactively, be sure to update paths in Main Process")
 else:
     print("Please Provide the UDS3_data, Json Crosswalk Folder and Data Order paths")
     exit()
@@ -538,11 +541,14 @@ a3_list = ['sib###yob', 'sib###agd','sib###pdx','kid###yob', 'kid###agd','kid###
 
 ########################### Main Process #############################################
 
+# #Define paths for interactive running
+# uds3_data_path = io.StringIO('C:\PATH\TO\UDS3\<UDS3_data_file>.csv')
+# json_folder_path = is.StringIO('C:\PATH\TO\JSON\FOLDER\')
+# data_order_path = io.StringIO('C:\PATH\TO\ORDER\FOLDER\')
+
 # Provide UDS3 data as input - try to provide the label data
-#nacc = pd.read_csv(r'C:\Users\jaiga\Downloads\Final_parsing\final_uds3.csv')
 nacc = pd.read_csv(uds3_data_path)
 print(f"UDS3_data has {nacc.shape[0]} rows and {nacc.shape[1]} columns")
-
 
 # Defining the UDS4 data frame
 uds4_df = pd.DataFrame()
@@ -572,7 +578,6 @@ for col in float_columns:
         print(f"Skipping column '{col}' due to non-integer values.")
 
 # Final process 
-#directory = r'C:\Users\jaiga\Downloads\final_crosswalk_check\UDS4_Cross_JSON\Crosswalk' # Input path to your jsons
 directory = json_folder_path
 
 # Process all the json data

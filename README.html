@@ -352,8 +352,8 @@ display: none;
 </div>
 
 
-<div id="json-script-for-data-processing" class="section level1">
-<h1>JSON Script for Data Processing</h1>
+<div id="uds4-crosswalk---crosswalk-parser" class="section level1">
+<h1>UDS4 Crosswalk - Crosswalk Parser</h1>
 <div id="authors" class="section level2">
 <h2>Authors</h2>
 <ul>
@@ -366,109 +366,120 @@ ADRC</li>
 <h2>License</h2>
 <p>This project is licensed under the MIT License - see <a href="LICENSE.md">LICENSE</a> for details</p>
 </div>
-<div id="uds_json_maker.py" class="section level2">
-<h2>UDS_JSON_Maker.py</h2>
-<p>This is the primary Python script which processes Excel files in a
-given folder (given as a command line argument), process the relevant
-mapping rules, and saves the output as JSON.<br> <br> The goal of the
-JSON files is to help programmatically apply the conversion of data
-elements between UDS3 and UDS4 formats. An emphasis is given on UDS3
--&gt; UDS4 although reversible rules are also flagged.</p>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>This script is designed to be used in conjunction with a collection
+of JSON-based crosswalk rules to migrate UDS3 data to UDS4 data. It is
+the final step in the UDS3-UDS4 Crosswalk process. Three constituent
+pieces are required: - UDS3 source data csv file - At least one JSON
+Crosswalk file - A file of UDS4 Data Elements used for re-ordering Both
+Python and R versions of the Crosswalk Parser exist.</p>
+<p><strong>Note a column order text file is provided with this
+repository and can be used with this Parser. This matches the Data
+Element Dictionary order provided by NACC. The file name is
+<code>UDS4Data_ColumnOrder.txt</code> found within this parser’s main
+folder.</strong></p>
 </div>
-<div id="crosswalk-folder" class="section level2">
-<h2>Crosswalk Folder</h2>
-<p>This folder contains properly formatted Excel workbooks used by the
-Python script to generate the JSON files containing the following
-sheets:</p>
-<ul>
-<li>UDS3_4 Tables Data Dictionary: Data dictionary for the three UDS
-variable tables and the change indicators between UDS3 and UDS4</li>
-<li>XX UDS3 DED: Form specific table for UDS3 built from the Data
-Element Dictionary for UDS3, included for reference</li>
-<li>XX UDS3 REDCap: Form specific table for UDS3 built from the original
-Kansas ADRC REDCap data dictionary</li>
-<li>XX UDS4 REDCap: Form specific table for UDS4
-<ul>
-<li>Note, Template Mappings are oriented using REDCap-to-REDCap
-conventions</li>
-</ul></li>
-<li>Mappings Data Dictionary: Data dictionary for the template mappings
-to migrate UDS variables from version 3 to version 4</li>
-<li>Template Mappings REDCap: The sheet containing all rules processed
-and stored into JSON format. Modifications to rules for a specific ADRC
-can be applied here.</li>
-<li>XX Mappings - ADRC Decisions: Ambiguous rules that should be vetted
-by the ADRC. Options are flagged as ADRC Decision_A and ADRC Decision_B
-where applicable to indicate rule sets.</li>
-</ul>
-<p><strong>Rules in ‘Mappings - ADRC Decisions’ must be vetted and added
-to the ‘Template Mappings REDCap’ sheet before compiling JSON
-files!</strong></p>
+<div id="scope" class="section level2">
+<h2>Scope</h2>
+<p>This Crosswalk Parser is designed to work with csv formatted data
+files e.g. those from REDCap export. It has been validated for mapping
+of levels (i.e. the numeric representation of responses) although
+options for label mapping are a potential modification the authors are
+considering.</p>
 </div>
-<div id="modification-of-template-mappings" class="section level2">
-<h2>Modification of Template Mappings</h2>
-<p>Template mappings can be modified as needed to reflect your specific
-instance of UDS3 and UDS4. Structure on the Template Mappings REDCap
-should remain consistent, simply update the entries in the ‘UDS3 value’
-and ‘UDS4 value’ columns.<br> <br> As described, be sure to select rules
-from the ADRC Decision sheet and add them to the Template Mappings prior
-to generating JSON files.</p>
+<div id="json-files" class="section level2">
+<h2>JSON Files</h2>
+<p>For details on the generation of JSON crosswalk mapping files, please
+see the <code>UDS4 Crosswalk - JSON Maker</code> repository. These
+scripts presume appropriate JSON files have already been generated. They
+do not need have been generated from the JSON Maker but a similar output
+is expected.</p>
+</div>
+<div id="uds_crosswalk_parser.py-uds_crosswalk_parser.r" class="section level2">
+<h2>UDS_Crosswalk_Parser.py / UDS_Crosswalk_Parser.R</h2>
+<p>These are the principal processing scripts which take in an
+appropriately formatted file of UDS3 data, a folder of the JSON files
+developed by the JSON maker, and a listing of the UDS4 variables in a
+preferred order. The Crosswalk Parser then applies the JSON rules in
+order to migrate all UDS3 data to their nearest UDS4 variants where they
+exist. UDS3 data which do not have a JSON mapping rule (i.e. a nearest
+UDS4 neighbor) are excluded and will not be returned.</p>
+</div>
+<div id="arguments-folders-and-required-files" class="section level2">
+<h2>Arguments, Folders, and Required Files</h2>
+<p>Both <code>UDS_Crosswalk_Parser.py</code> and
+<code>UDS_Crosswalk_Parser.R</code> are designed to be run from the
+command line using either of the following:</p>
+<pre class="bash"><code>python UDS_Crosswalk_Parser.py &lt;path to UDS3 CSV&gt; &lt;path to folder of JSON files&gt; &lt;path to UDS4 order txt&gt;</code></pre>
+<p><br></p>
+<pre class="bash"><code>Rscript UDS_Crosswalk_Parser.R &lt;path to UDS3 CSV&gt; &lt;path to folder of JSON files&gt; &lt;path to UDS4 order txt&gt;</code></pre>
+<p>The two scripts can also be run directly from within a Jupyter
+notebook or Rstudio environment. Be sure to initialize the string paths
+to the files / folders within the Main Process sections as needed.</p>
 </div>
 <div id="application" class="section level2">
 <h2>Application</h2>
-<div id="requirements" class="section level3">
-<h3>Requirements</h3>
+<div id="requirements---python" class="section level3">
+<h3>Requirements - Python</h3>
 <p>Before you run the script, make sure you have Python installed on
 your system along with the required libraries. To install the necessary
 dependencies, follow these steps:</p>
 <ol style="list-style-type: decimal">
-<li><p>Install Python (if not already installed):</p>
+<li>Install Python (if not already installed):
 <ul>
 <li>Download Python: <a href="https://www.python.org/downloads/" class="uri">https://www.python.org/downloads/</a></li>
 <li>Ensure that Python and <code>pip</code> (Python’s package installer)
-are added to your system’s PATH.</li>
+are added to your system’s PATH environmental variable</li>
 </ul></li>
-<li><p>Install required libraries from the command line using pip (or
-controlling environment e.g. conda)</p>
-<pre class="bash"><code>pip install -r requirements.txt</code></pre></li>
+<li>Install required libraries from the command line using pip (or
+controlling environment e.g. conda)
+<code>bash    pip install -r requirements.txt</code></li>
+</ol>
+</div>
+<div id="requirements---r" class="section level3">
+<h3>Requirements - R</h3>
+<ol style="list-style-type: decimal">
+<li>Install R (if not already installed)
+<ul>
+<li>Download R: <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></li>
+<li>Ensure that R is added to your system’s PATH environmental
+variable</li>
+</ul></li>
+<li>Necessary packages will be evaluated and downloaded automatically
+when <code>UDS_Crosswalk_Parser.R</code> is run using primary repository
+(default CRAN)</li>
 </ol>
 </div>
 <div id="how-to-use-the-script" class="section level3">
 <h3>How to Use the Script</h3>
-<p>Step 1: Prepare Your Files Ensure that your Excel files are located
-in a folder on your computer. Default</p>
-<p>Step 2: Run the Script To run the script, open your terminal or
-command prompt and navigate to the folder where the script is located.
-Run the following command, replacing <folder_path> with the path to the
-folder containing your Excel files if needed:
-<code>bash python UDS_JSON_Maker.py &lt;folder_path&gt;</code> For
-example:
-<code>bash python UDS_JSON_Maker.py C:/Users/YourUsername/Downloads/crosswalks</code>
-<strong><em>If no folder path is provided, this will default to
-‘./Crosswalk’ located in folder from which the UDS_JSON_Maker.py is run.
-For convenience, a collection of crosswalk sheets are provided
-here.</em></strong></p>
-<p>The script will process all Excel files in the provided folder and
-generate: - A JSON file for each Excel file, named
-<original_filename>_mappings.json which can then be used for a
-programmatic crosswalk.</p>
+<p>Step 1: Prepare Your UDS3, JSON Crosswalk, and Variable order files.
+Make note of locations.</p>
+<p>Step 2a: Run the Script from the command line Navigate to the folder
+where the desired script file is located and enter either the Python or
+R variant as described above</p>
+<p>Step 2b: Run the script interactively The .py or .R file can be
+opened within an IDE such as Jupyter Notebook or RStudio and run
+interactively. If this step is done, folder paths will need to be
+provided by the user within the scripts. Sections for these variables
+can be found at the beginning of the “Main Process” section of each
+parser.</p>
+<p>The script will apply the crosswalk parsing migrating all valid
+variables from UDS3 to UDS4.</p>
 <p>Step 3: <strong>Check the Output</strong>: After running the script,
-the generated JSON files are in the same folder as the Excel files.</p>
-<p><strong>Note</strong>: Ensure the Excel files contain the required
-input in the UDS3/4 REDCap dictionary sheets and Template Mappings
-sheets. Note, new UDS4 forms have no mappings rules thus some crosswalk
-files for forms like A1a, A4a, etc., do not have the ‘Template Mappings
-REDCap’ sheet . Be sure to remove or delete those Excel crosswalk files
-from the folder before running the script.</p>
+the The script will apply the cross walk to the UDS3 data and generate a
+new UDS4 data file called <code>uds4_redcap_data.csv</code>.</p>
 </div>
 </div>
 <div id="troubleshooting" class="section level2">
 <h2>Troubleshooting</h2>
 <p>If you encounter any issues, ensure that you are using the correct
 Python version and have installed all dependencies from the
-requirements.txt file.<br> Make sure that the folder path provided
-contains only .xlsx files that match the required format described in
-the Crosswalk section above.</p>
+requirements.txt file.<br> Be sure JSON files only exist within the JSON
+folder path provided. Make certain the ordered variable list for UDS4
+exists and contains all listed variables. Again, use the
+<code>UDS4Data_ColumnOrder.txt</code> file provided with this repository
+as desired.</p>
 </div>
 </div>
 
