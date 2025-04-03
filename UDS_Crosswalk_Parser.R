@@ -2,8 +2,9 @@
 
 #Check and install libraries
 lib_list <- c("jsonlite", "dplyr", "stringr", "readr")
-new_libs <- lib_list[!(lib_list %in% install.packages()[,"Package"])]
-if(length(new_libs)>0) install.packages(new_libs)
+installed_libs <- installed.packages()[, "Package"]
+new_libs <- lib_list[!(lib_list %in% installed_libs)]
+if(length(new_libs) > 0) install.packages(new_libs)
 
 
 # Libraries needed
@@ -22,8 +23,12 @@ if (length(args) > 2) {
   uds3_data_path <- args[1]
   json_folder_path <- args[2]
   data_order_path <- args[3]
-} else if(interactive()) {
-  print("Running interactively, be sure to update paths in Main Process section")
+} else if (length(args) == 0 && !identical(Sys.getenv("RSCRIPT_PORTABLE"), "true") && isTRUE(isatty(stdout()))) {
+  message("Running interactively, be sure to uncomment the paths in Main Process section")
+  # Set empty variables (execution continues without error)
+  uds3_data_path <- NULL
+  json_folder_path <- NULL
+  data_order_path <- NULL
 } else{
   cat("Please Provide the UDS3_data, Json Crosswalk Folder and Data Order paths\n")
   quit(save = "no", status = 1)
@@ -708,11 +713,16 @@ a3_list <- c('sib###yob', 'sib###agd', 'sib###pdx','sib###ago','sib###moe',
 
 # Loading files and folders manually if not running from command line
 .order_path <- .json_path <- .uds3_path <- NULL
+
+#.uds3_path = normalizePath(file.choose())
+#.json_path = normalizePath(choose.dir())
+#.order_path = normalizePath(file.choose())
+
 if(is.null(uds3_data_path))  uds3_data_path <- .uds3_path
 if(is.null(json_folder_path)) json_folder_path <- .json_path
 if(is.null(data_order_path)) data_order_path <- .order_path
 if(is.null(uds3_data_path) || is.null(json_folder_path) || is.null(data_order_path)) {
-  cat("Folder paths missing, check command line arguments or provide paths at beginning of main process")
+  cat("Folder paths missing, check command line arguments or uncomment paths at beginning of main process")
   quit(save = "no", status = 1)
 }
 
@@ -775,3 +785,6 @@ process_and_save_data(
   data_order_path, 
   final_df,
   "uds4_redcap_data.csv")
+
+cat("\n\nYour Data Migration from UDS3 to UDS4 is Completed\n")
+cat("The UDS4 Data is saved in the current folder with name - uds4_redcap_data.csv")

@@ -1,12 +1,10 @@
 import re
 import json
 import sys, os
-import rdata
 import warnings
 import pandas as pd
 import numpy as np
 import io
-from bs4 import BeautifulSoup
 
 # Ignore all warnings
 warnings.filterwarnings("ignore")
@@ -17,9 +15,10 @@ if len(sys.argv) > 3:
     uds3_data_path, json_folder_path, data_order_path = sys.argv[1],sys.argv[2],sys.argv[3]
 elif sys.stdin and sys.stdin.isatty(): 
   print("Running interactively, be sure to update paths in Main Process")
+  uds3_data_path = json_folder_path = data_order_path = None
+
 else:
     print("Please Provide the UDS3_data, Json Crosswalk Folder and Data Order paths")
-    exit()
 
 
 def load_json_files(directory):
@@ -537,14 +536,20 @@ a3_stop_dict = {
 
 struct_map1 = {'hrtattage':'cvhatt','strokage':'cbstroke','pdage':'pd','lasttbi':'tbi','pdothrage':'pdothr','tiaage':'cbtia'}
 
-a3_list = ['sib###yob', 'sib###agd','sib###pdx','kid###yob', 'kid###agd','kid###pdx']
+a3_list = ['sib###yob', 'sib###agd','sib###pdx','sib###ago','sib###moe',
+           'kid###yob', 'kid###agd','kid###pdx','kid###ago','kid###moe']
 
 ########################### Main Process #############################################
 
 # #Define paths for interactive running
-# uds3_data_path = io.StringIO('C:\PATH\TO\UDS3\<UDS3_data_file>.csv')
-# json_folder_path = is.StringIO('C:\PATH\TO\JSON\FOLDER\')
-# data_order_path = io.StringIO('C:\PATH\TO\ORDER\FOLDER\')
+
+#uds3_data_path = r'C:\PATH\TO\UDS3\<UDS3_data_file>.csv'
+#json_folder_path = r'C:\PATH\TO\JSON\FOLDER'
+#data_order_path = r'C:\PATH\TO\ORDER\FOLDER\<dataOrder_file>.txt'
+
+if uds3_data_path is None or json_folder_path is None or data_order_path is None:
+    print("Cannot able to find the paths in Main Process")
+    exit()
 
 # Provide UDS3 data as input - try to provide the label data
 nacc = pd.read_csv(uds3_data_path)
@@ -596,3 +601,4 @@ process_and_save_data(
     "uds4_redcap_data.csv")
 
 print("Your Data Migration from UDS3 to UDS4 is Completed")
+print("The UDS4 Data is saved in the current folder with name - uds4_redcap_data.csv")
