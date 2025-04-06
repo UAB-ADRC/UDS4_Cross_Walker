@@ -28,6 +28,8 @@ These are the principal processing scripts which take in an appropriately format
 ## Arguments, Folders, and Required Files
 Both `UDS_Crosswalk_Parser.py` and `UDS_Crosswalk_Parser.R` are designed to be run from the command line using either of the following:
 
+### 1. Paths as arguments from the command line
+
 ```bash
 python UDS_Crosswalk_Parser.py <path to UDS3 CSV> <path to folder of JSON files> <path to UDS4 order txt>
 ```
@@ -35,6 +37,12 @@ python UDS_Crosswalk_Parser.py <path to UDS3 CSV> <path to folder of JSON files>
 ```bash
 Rscript UDS_Crosswalk_Parser.R <path to UDS3 CSV> <path to folder of JSON files> <path to UDS4 order txt>
 ```
+
+### 2. Interactive selection of files and folders
+
+If the OS support GUI based folder selection, the scripts can also be run from the command line without arguments.  The system will then prompt the user to select (1) the UDS3 CSV, (2) the folder location of the JSON files, and (3) the text file of UDS4 variables for ordering.
+
+### 3. 
 
 The two scripts can also be run directly from within a Jupyter notebook or Rstudio environment.  Be sure to initialize the string paths to the files / folders within the Main Process sections as needed.
 
