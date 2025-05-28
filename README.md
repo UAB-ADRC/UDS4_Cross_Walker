@@ -173,7 +173,7 @@ This Crosswalk Parser is designed to work with a csv-based data dictionary, spec
 
 After the comparison is completed, an Excel workbook is generated which can be used to update local REDCap dictionaries or Crosswalk dictionaries as the user sees fit.
 
-## UDS_dictionary_update.R
+## UDS_Dictionary_Update.R
 This is the primary script which takes in a prior and updated pair of REDCap dictionaries and an optional curated list of variables to explicitly compare.  The comparison tool identifies variables which only appear in the prior or new dictionary as well as any dictionary field deviations for any matched variables.  After the comparison, an Excel workbook output summarizes all comparisons made for downstream application by the user.
 
 ## Arguments, Folders, and Required Files
@@ -216,19 +216,19 @@ The script will compare the two dictionaries as described before generating an E
 
 Step 3: **Check the Output**: 
 After running the script, an Excel workbook output file will be generated titled "UDS_Dictionary_Comparison_YYYYMMDD.xlsx" using today's date.  It will have the following tabs:
-    - 'Unmatched - Prior' - entries found exclusively in the __prior__ dictionary
-    - 'Unmatched - New' - entries found solely in the __new__ dictionary
-    - 'Prior Entries' - entries from the prior dictionary where field discrepancies were found
-    - 'New Entries' - entries for those same variables from the new dictionary
-    - 'Field Differences' - a breakdown for each variable listing which dictionary fields differed and what the field entries were for the prior and new dictionary
+  - 'Unmatched - Prior' - entries found exclusively in the __prior__ dictionary
+  - 'Unmatched - New' - entries found solely in the __new__ dictionary
+  - 'Prior Entries' - entries from the prior dictionary where field discrepancies were found
+  - 'New Entries' - entries for those same variables from the new dictionary
+  - 'Field Differences' - a breakdown for each variable listing which dictionary fields differed and what the field entries were for the prior and new dictionary
 Note: the 'Prior Entries' and 'New Entries' tab will include a new "Index" column which lists the absolute position of the variable in its respective dictionary
 
 ## Modifying definitions
 A series of variables can be modified as desired within `UDS_Dictionary_Update.R`
-    - `var_col` - The column containing the variable name in the dictionary, defaults to "Variable / Field Name"
-    - `ignored_fields` - Any column names the user wishes to not be compared, defaults solely the "Index" column generated during processing but other REDCap fields can be added to the vector as desired
-    - `to_ignore` - Any specific variables the user wishes to ignore, set to NULL by default but can be used in tandem with the curated list
-    - `ignored_regex` - A regular expression which can be applied during comparison to flag a field pairing as being the same even if a difference is observed; default is set to ignore any instance of "[current-instance]==1" as a practical example
+  - `var_col` - The column containing the variable name in the dictionary, defaults to "Variable / Field Name"
+  - `ignored_fields` - Any column names the user wishes to not be compared, defaults solely the "Index" column generated during processing but other REDCap fields can be added to the vector as desired
+  - `to_ignore` - Any specific variables the user wishes to ignore, set to NULL by default but can be used in tandem with the curated list
+  - `ignored_regex` - A regular expression which can be applied during comparison to flag a field pairing as being the same even if a difference is observed; default is set to ignore any instance of "[current-instance]==1" as a practical example
 
 
 ## Troubleshooting
