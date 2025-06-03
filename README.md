@@ -169,7 +169,7 @@ This script compares the content of two REDCap dictionaries for discrepancies in
 __Note a curated file is provided with this repository and can be used with this Comparison script.  It matches the Data Element Dictionary order provided by NACC (May 2025).  The file name is `UDS4Data_ColumnOrder.txt` found within this parser's main folder.__
 
 ## Scope
-This Crosswalk Parser is designed to work with a csv-based data dictionary, specifically from a REDCap export.  While developed for UDS4, this script could be used for any version comparisons of a dictionary.
+This Dictionary Comparison tool is designed to work with a set of csv-based data dictionaries, specifically from REDCap export.  While developed for UDS4, this script could be used for any version comparisons of a dictionary.
 
 After the comparison is completed, an Excel workbook is generated which can be used to update local REDCap dictionaries or Crosswalk dictionaries as the user sees fit.
 
@@ -229,6 +229,89 @@ A series of variables can be modified as desired within `UDS_Dictionary_Update.R
   - `ignored_fields` - Any column names the user wishes to not be compared, defaults solely the "Index" column generated during processing but other REDCap fields can be added to the vector as desired
   - `to_ignore` - Any specific variables the user wishes to ignore, set to NULL by default but can be used in tandem with the curated list
   - `ignored_regex` - A regular expression which can be applied during comparison to flag a field pairing as being the same even if a difference is observed; default is set to ignore any instance of "[current-instance]==1" as a practical example
+
+
+## Troubleshooting
+If you encounter any issues, ensure that you are using the correct Python version and have installed all dependencies from the requirements.txt file.<br>
+Although columns are checked between the dictionaries, make sure they match appropriately for ease of application
+Make certain the ordered variable list for UDS4 exists and contains all listed variables.  Again, use the `UDS4Data_ColumnOrder.txt` file provided with this repository as desired.
+
+
+# Part 4 - Crosswalk Field / Level / Label Updater
+
+## Overview
+This script steps through previously established human readable crosswalk files and compares a subset of their fields (currently limited to the Field Label, Response Levels, and Response labels) against a REDCap dictionary to check for discrepancies on a form-by-form basis which should be updated in the Crosswalk and its rules prior to JSON generation.  This is largely an adaptation of the Dictionary Comparison script described in part 3.  Three constituent pieces are required:
+  - A folder path leading to set of Crosswalk Excel files to be assessed for field updating
+  - A new iteration of the REDCap dictionary to be used for updating
+  - A curated file listing a specific set of variables for comparison
+
+__Note a curated file is provided with this repository and can be used with this Comparison script.  It matches the Data Element Dictionary order provided by NACC (May 2025).  The file name is `UDS4Data_ColumnOrder.txt` found within this parser's main folder.__
+
+## Scope
+This Crosswalk Updater is designed to work with a set of human readable Excel Crosswalk matching the format developed for the UDS3-UDS4 Crosswalk family of applications along with a csv-based data dictionary, specifically from a REDCap export.
+
+After the comparison is completed, a collection of Excel workbooks, one for each processed Crosswalk file / UDS4 form, are generated which can be used to update local Crosswalk dictionaries as the user sees fit.
+
+This tool is primarily designed to guide updating of the Excel Crosswalks leading into JSON file regeneration for programmatic crosswalking between UDS3 and UDS4.
+
+**IMPORTANT - THIS DOES NOT PROVIDE SPECIFIC UPDATED RULES.  THESE STILL NEED TO BE MANUALLY CURATED WITHIN THE CROSSWALK FILES PRIOR TO JSON FILE REGENERATION**
+
+## UDS_Cross_Update.R
+This is the primary script which takes in a folder path leading to a set of Excel based Crosswalk dictionaries, a REDCap dictionary for update referencing, and a curated list of variables to explicitly compare within the Crosswalk i.e. from the UDS4 Data Element Dictionary.  The comparison tool identifies variables which only appear in Crosswalk as well as any dictionary field deviations for any matched variables.  After the comparison, a series of form specific Excel workbooks summarizes all comparisons made for downstream application by the user.
+
+## Arguments, Folders, and Required Files
+`UDS_Cross_Update.R` is designed to be run from the command line using either of the following:
+
+### 1. Paths as arguments from the command line
+
+```bash
+Rscript UDS_Cross_Update.R <path to folder of Excel based Crosswalk files> <path to updated dictionary CSV> <path to curated variable list txt>
+```
+
+### 2. Interactive selection of files and folders
+
+If the OS support GUI based folder selection, the scripts can also be run from the command line without arguments.  The system will then prompt the user to select (1) the folder location of the Crosswalk files, (2) the REDCap dictionary to be used for updating, and (3) the curated list of variables for comparison.
+
+### 3. Running scripts directly from IDE environment
+
+The script can also be run directly from within an Rstudio environment.  Be sure to initialize the string paths to the files / folders within the Main Process sections as needed.
+
+
+## Application
+
+### Requirements - R
+1. Install R (if not already installed)
+    - Download R: https://cran.r-project.org/
+    - Ensure that R is added to your system's PATH environmental variable
+
+2. Necessary packages will be evaluated and downloaded automatically when `UDS_Dictionary_Update.R` is run using primary repository (default CRAN)
+
+### How to Use the Script
+Step 1: Prepare your Crosswalks, updated dictionary, and curated variable list files. Make note of locations.
+
+Step 2a: Run the Script from the command line
+Navigate to the folder where the desired script file is located and enter either the BASH commands as described above
+
+Step 2b: Run the script interactively
+The .R file can be opened within the RStudio IDE and run interactively.  If this step is done, folder paths will need to be provided by the user within the scripts.  Sections for these variables can be found at the beginning of the "Main Process" section.
+
+The script will compare the two dictionaries as described before generating the set of form-specific Excel workbooks.
+
+Step 3: **Check the Output**: 
+After running the script, a collections of Excel workbook output files, one for each form / Crosswalk file, will be generated titled "UDS_FORMNAME_Dictionary_Comparison_YYYYMMDD.xlsx" using today's date and the appropriate FORMNAME (e.g. A2, D1a_D1b).  It will have the following tabs:
+  - 'Unmatched - Crosswalk' - entries found exclusively in the Crosswalks UDS4 dictionary, typically these are only form-specific header variables
+  - 'Crosswalk Entries' - entries from the Crosswalk where field discrepancies were found
+  - 'New Entries' - entries for those same variables from the dictionary used for update referencing
+  - 'Field Differences' - a breakdown for each variable listing the fields (limited to the Field Label, Response LEVELS, and Response LABELS) differed and what the field entries were for the Crosswalk in question and the updated dictioanry
+
+## Modifying definitions
+A series of variables can be modified as desired within `UDS_Cross_Update.R`
+  - `var_col` - The column containing the variable name in the dictionary, defaults to "Variable / Field Name"
+  - `cross_col` - The column containing the variable name in the Crosswalk, default to 'UDS4 data element name'
+  - `ignored_fields` - Any column names the user wishes to not be compared, defaults to NULL although other fields can be added as a vector if desired
+  - `to_ignore` - Any specific variables the user wishes to ignore, set to NULL by default but can be used in tandem with the curated list
+  - `ignored_regex` - A regular expression which can be applied during comparison to flag a field pairing as being the same even if a difference is observed; default is NULL
+  - `redcap_dict` - The dictionary which defines which fields in the Crosswalk files and dictionary should be compared; if other fields are desired for comparison, add them as appropriate to the list's `crosswalk` and `dictionary` entries as well as in both vectors of the `comparison` entry in a positionally locked fashion e.g. two fields in the 5th element of the two vectors will be compared
 
 
 ## Troubleshooting

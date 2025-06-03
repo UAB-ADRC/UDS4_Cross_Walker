@@ -26,7 +26,7 @@ if (length(args) > 2) {
   new_path <- NULL
   curated_path <- NULL
 } else{
-  cat("Please provide the path and name for the (1) prior UDS4 data dictionary, (2) updated UDS4 dictionary for comparison, and (3) Curated list of variables (optional)\n")
+  cat("Please provide the path and name for the (1) prior UDS4 data dictionary, (2) updated UDS4 dictionary for comparison, and (3) Curated list of variables\n")
   quit(save = "no", status = 1)
 }
 
@@ -98,7 +98,7 @@ variable_comparison <- function(.dict_list, .curate){
       if(.mismatch == "prior_only") prior_dict[get(var_col) %in% match_list[["mismatch"]][[.mismatch]]]
       if(.mismatch == "new_only") new_dict[get(var_col) %in% match_list[["mismatch"]][[.mismatch]]]
     })
-  names(mismatch_set) <- writer_key[["mismatch"]]
+  names(mismatch_set) <- writer_key[["mismatch"]][match(names(mismatch_set), names(writer_key[["mismatch"]]))]
   mismatch_set <- mismatch_set[!sapply(mismatch_set, is.null)]
   
   
