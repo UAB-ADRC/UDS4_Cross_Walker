@@ -1,7 +1,7 @@
 # UDS Crosswalk Level and Label Updater
 
 #Check and install libraries
-lib_list <- c("dplyr", "stringr", "readr", "openxlsx")
+lib_list <- c("lubridate", "openxlsx", "data.table")
 installed_libs <- installed.packages()[, "Package"]
 new_libs <- lib_list[!(lib_list %in% installed_libs)]
 if(length(new_libs) > 0) install.packages(new_libs)
@@ -348,7 +348,7 @@ ignored_fields <- NULL
 if(is.null(cross_path))  cross_path <- .cross_path
 if(is.null(new_path)) new_path <- .new_path
 if(is.null(curated_path)) curated_path <- .curated_path
-if(is.null(prior_path) || is.null(new_path) || is.null(curated_path)) {
+if(is.null(cross_path) || is.null(new_path) || is.null(curated_path)) {
   cat("File paths missing, check command line arguments or uncomment paths at beginning of main process")
   quit(save = "no", status = 1)
 }

@@ -161,7 +161,8 @@ comparison_writer <- function(.compare){
   
   #Write the comparisons to file
   if(!is.null(.comp_proc) && length(.comp_proc)>0){
-    openxlsx::write.xlsx(c(.compare[["mismatch"]], .comp_proc), file=.file)}
+    openxlsx::write.xlsx(c(Mismatch = .compare[["mismatch"]], .comp_proc), file=.file)
+  }
   
   return(NULL)
 }
