@@ -53,7 +53,7 @@
                     "mappings": [
                         {
                             "UDS3_value": "0-110, 999",
-                            "UDS4_value": "1-110, 999",
+                            "UDS4_value": "0-110, 999",
                             "reversible": "NA",
                             "note": "NA"
                         }
@@ -136,7 +136,7 @@
                     "mappings": [
                         {
                             "UDS3_value": "0-110, 999",
-                            "UDS4_value": "1-110, 999",
+                            "UDS4_value": "0-110, 999",
                             "reversible": "NA",
                             "note": "NA"
                         }
@@ -280,7 +280,7 @@
                     "mappings": [
                         {
                             "UDS3_value": "0-110, 999",
-                            "UDS4_value": "1-110, 999",
+                            "UDS4_value": "0-110, 999",
                             "reversible": "NA",
                             "note": "NA"
                         }
@@ -551,7 +551,7 @@
                     "mappings": [
                         {
                             "UDS3_value": "0-110, 999",
-                            "UDS4_value": "1-110, 999",
+                            "UDS4_value": "0-110, 999",
                             "reversible": "NA",
                             "note": "NA"
                         }

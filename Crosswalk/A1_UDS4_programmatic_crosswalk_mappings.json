@@ -6872,7 +6872,7 @@
                     "mappings": [
                         {
                             "UDS3_value": "1-4, 9",
-                            "UDS4_value": "1-5, 9",
+                            "UDS4_value": "1-4, 6, 9",
                             "reversible": "NA",
                             "note": "Only response levels 1-4,9 mappable to UDS3"
                         }

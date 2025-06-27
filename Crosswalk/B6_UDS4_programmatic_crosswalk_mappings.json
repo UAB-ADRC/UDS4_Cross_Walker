@@ -793,7 +793,7 @@
                     "mappings": [
                         {
                             "UDS3_value": "16. <i>Sum all checked answers for a Total GDS Score</i>",
-                            "UDS4_value": "<div class=\"rich-text-field-label\"><p><span style=\"font-weight: normal;\">16. </span>Sum all checked answers for a Total GDS Score </p></div>",
+                            "UDS4_value": "<div class=\"rich-text-field-label\"><p><span style=\"font-weight: normal;\">16. Manual Data Entry of Total GDS Score</span> </p> <p> </p></div>",
                             "reversible": "Yes",
                             "note": "NA"
                         }
