@@ -548,8 +548,9 @@ process_mappings <- function(mapping_data, mapping_type) {
             # Ensure response_map exists and relevant columns are present
             if (length(response_map) > 0) {
               
-              # Check if uds3_value contains complex expressions
-              if (!grepl("grep\\(", uds3_value)) {
+              # Check if uds3_value contains complex expressions, except for the 'cancer' column, which has a uniquely different mapping compared to other variables.
+              
+              if (!grepl("grep\\(", uds3_value) && uds3_var != "cancer") {
                 
                 # Convert "NULL" strings in response_map to NA
                 response_map[response_map == "NULL"] <- NA_character_
@@ -602,9 +603,10 @@ process_all_jsons <- function(directory) {
 
 # Function to replace NaN with NA
 replace_nan_and_na <- function(df) {
-  df %>% 
-    mutate(across(everything(), ~ ifelse(is.na(.) | . == "<NA>", "NA", .)))
+  df %>%
+    mutate(across(where(is.character), ~ ifelse(is.na(.) | . == "<NA>", "NA", .)))
 }
+
 
 # Cross-checking data function
 data_crosscheck <- function(uds4_df) {

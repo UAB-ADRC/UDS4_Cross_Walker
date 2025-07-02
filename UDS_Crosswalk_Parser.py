@@ -450,7 +450,7 @@ def process_mappings(mapping_data, mapping_type):
                     if mapping_type not in ['Structured_Transformations','High_Complexity']:
                         # Ensure all values from uds3_df are preserved in uds4_df where they are not mapped
                         if response_map:
-                            if "grep(" not in uds3_value:
+                            if "grep(" not in uds3_value and uds3_var!='cancer':
                                 uds4_df.loc[~uds4_df[uds4_var].isin(response_map.values()), uds4_var] = uds3_df[uds3_var].astype(str)              
 
 
