@@ -3079,7 +3079,7 @@
                             "UDS3_value": "NA & NA & NA",
                             "UDS4_value": 0,
                             "reversible": "NA",
-                            "note": "GAITABN maps to 0 ONLY if ALL PARKGAIT is blank/NA and GAITPSP is blank/NA and NPHGAIT is blank/NA"
+                            "note": "GAITABN maps to 0 ONLY if ALL PARKGAIT is blank/NA and GAITPSP is blank/NA and GAITNPH is blank/NA"
                         }
                     ]
                 },
@@ -3090,7 +3090,7 @@
                             "UDS3_value": "1 | 1 | 1",
                             "UDS4_value": "1",
                             "reversible": "NA",
-                            "note": "GAITABN maps to 1 if PARKGAIT==1 OR GAITPSP==1 OR NPHGAIT==1"
+                            "note": "GAITABN maps to 1 if PARKGAIT==1 OR GAITPSP==1 OR GAITNPH==1"
                         }
                     ]
                 },
@@ -3101,7 +3101,7 @@
                             "UDS3_value": "8 & 8 & 8",
                             "UDS4_value": "8",
                             "reversible": "NA",
-                            "note": "GAITABN only maps to 8 when ALL PARKGAIT==8 AND GAITPSP==8 AND NPHGAIT==8"
+                            "note": "GAITABN only maps to 8 when ALL PARKGAIT==8 AND GAITPSP==8 AND GAITNPH==8"
                         }
                     ]
                 },
@@ -3112,7 +3112,7 @@
                             "UDS3_value": "<BLANK> & <BLANK> & <BLANK>",
                             "UDS4_value": "No abnormal signs in this section are present",
                             "reversible": "NA",
-                            "note": "GAITABN maps to 'Absent' ONLY if ALL PARKGAIT=='<BLANK>' AND GAITPSP=='<BLANK>' AND NPHGAIT=='<BLANK>'"
+                            "note": "GAITABN maps to 'Absent' ONLY if ALL PARKGAIT=='<BLANK>' AND GAITPSP=='<BLANK>' AND GAITNPH=='<BLANK>'"
                         }
                     ]
                 },
@@ -3123,7 +3123,7 @@
                             "UDS3_value": "1 Yes | 1 Yes | 1 Yes",
                             "UDS4_value": "Yes (<b>IF YES</b>, consider completing additional measures as described in Section 2D)",
                             "reversible": "NA",
-                            "note": "GAITABN maps to 'Present' if PARKGAIT=='1 Yes' OR GAITPSP=='1 Yes' OR NPHGAIT=='1 Yes'"
+                            "note": "GAITABN maps to 'Present' if PARKGAIT=='1 Yes' OR GAITPSP=='1 Yes' OR GAITNPH=='1 Yes'"
                         }
                     ]
                 },
@@ -3134,7 +3134,7 @@
                             "UDS3_value": "8 Not assessed & 8 Not assessed & 8 Not assessed",
                             "UDS4_value": "Not assessed",
                             "reversible": "NA",
-                            "note": "GAITABN only maps to 'Not Assessed' when ALL PARKGAIT=='8 Not assessed' AND GAITPSP=='8 Not assessed' AND NPHGAIT=='8 Not assessed'"
+                            "note": "GAITABN only maps to 'Not Assessed' when ALL PARKGAIT=='8 Not assessed' AND GAITPSP=='8 Not assessed' AND GAITNPH=='8 Not assessed'"
                         }
                     ]
                 },
@@ -3142,8 +3142,8 @@
                     "mapping_type": "Structured mapping",
                     "mappings": [
                         {
-                            "UDS3_value": "IF(PARKGAIT==1 || GAITPSP==1 || GAITNPH==1) {GAITABN=1} ELSEIF(PARKGAIT==8 && GAITPSP==8 && GAITNPH==8) {GAITABN=8} ELSE {ALIENLIMB=0}",
-                            "UDS4_value": "IF(PARKGAIT==1 || GAITPSP==1 || GAITNPH==1) {GAITABN=1} ELSEIF(PARKGAIT==8 && GAITPSP==8 && GAITNPH==8) {GAITABN=8} ELSE {ALIENLIMB=0}",
+                            "UDS3_value": "IF(PARKGAIT==1 || GAITPSP==1 || GAITNPH==1) {GAITABN=1} ELSEIF(PARKGAIT==8 && GAITPSP==8 && GAITNPH==8) {GAITABN=8} ELSE {GAITABN=0}",
+                            "UDS4_value": "IF(PARKGAIT==1 || GAITPSP==1 || GAITNPH==1) {GAITABN=1} ELSEIF(PARKGAIT==8 && GAITPSP==8 && GAITNPH==8) {GAITABN=8} ELSE {GAITABN=0}",
                             "reversible": "NA",
                             "note": "ADRC must decide appropriate merging and mapping"
                         }
