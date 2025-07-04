@@ -127,10 +127,12 @@ process_mappings <- function(mapping_data, mapping_type) {
     
     # Handle different mapping types
     if (mapping_type == "Direct_Mappings") {
-      response_levels <- Filter(function(m) m$mapping_type == "Response LEVELS", mapping$crosswalk_remappings)
+      response_levels <- Filter(function(m) startsWith(m$mapping_type, "Response LEVELS"), mapping$crosswalk_remappings)
+      
       conformity <- Filter(function(m) m$mapping_type == "Conformity", mapping$crosswalk_remappings)
     } else {
-      response_levels <- Filter(function(m) m$mapping_type == "Response LEVELS", mapping$crosswalk_mappings %||% list())
+      response_levels <- Filter(function(m) startsWith(m$mapping_type %||% "", "Response LEVELS"), mapping$crosswalk_mappings %||% list())
+      
       conformity <- Filter(function(m) m$mapping_type == "Conformity", mapping$crosswalk_mappings %||% list())
       structured_mappings <- Filter(function(m) m$mapping_type == "Structured mapping", mapping$crosswalk_mappings %||% list())
     }
@@ -533,10 +535,15 @@ process_mappings <- function(mapping_data, mapping_type) {
           # Handle grep-based text searches
           for (uds3_value in names(response_map)) {
             if (grepl("grep\\(", uds3_value)) {
-              # Extract search term
-              search_term <- str_match(uds3_value, 'grep\\("(.*?)",')[1,2] %>% tolower()
-              # Find matching rows
-              matches <- grepl(search_term, tolower(as.character(uds3_df[[uds3_var]])), fixed = TRUE)
+              search_terms <- tolower(str_match(uds3_value, 'grep\\("(.*?)",')[1,2]) %>%
+                strsplit(" or ", fixed = TRUE) %>% unlist()
+              
+              # Match any of the search terms (case-insensitive)
+              matches <- sapply(tolower(as.character(uds3_df[[uds3_var]])),
+                                function(x) any(str_detect(x, fixed(search_terms))))
+              matches[is.na(matches)] <- FALSE  # Replacing NA with FALSE
+              
+              # Assign value only to matched rows
               uds4_df[matches, uds4_var] <- response_map[[uds3_value]]
             }
           }

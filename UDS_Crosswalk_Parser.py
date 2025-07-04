@@ -92,11 +92,13 @@ def process_mappings(mapping_data, mapping_type):
         # Handle different mapping types
         if mapping_type == 'Direct_Mappings':
             # Extract response level and conformity mappings for direct mappings
-            response_levels = [m for m in mapping["crosswalk_remappings"] if m["mapping_type"] == "Response LEVELS"]
+            response_levels = [m for m in mapping["crosswalk_remappings"] if m.get("mapping_type", "").startswith("Response LEVELS")]
+
             conformity = [m for m in mapping["crosswalk_remappings"] if m["mapping_type"] == "Conformity"]
         else:
             # Extract response level, conformity, and structured mappings for non-direct mappings
-            response_levels = [m for m in mapping["crosswalk_mappings"] if m["mapping_type"] == "Response LEVELS"]
+            response_levels = [m for m in mapping["crosswalk_mappings"] if m.get("mapping_type", "").startswith("Response LEVELS")]
+
             conformity = [m for m in mapping["crosswalk_mappings"] if m["mapping_type"] == "Conformity"]
             structured_mappings = [m for m in mapping.get("crosswalk_mappings", []) if m["mapping_type"] == "Structured mapping"]
   
@@ -441,10 +443,14 @@ def process_mappings(mapping_data, mapping_type):
                     # Handling grep-based text searches (e.g., grep("guatemalan", HISPORX))
                     for uds3_value, uds4_value in response_map.items():
                         if "grep(" in uds3_value:
-                            # Extract the search term from the grep function
-                            search_term = re.search(r'grep\("(.*?)",', uds3_value).group(1).lower()
-                            # Apply the search term to find matching rows in uds3_df
-                            uds4_df.loc[uds3_df[uds3_var].astype(str).str.contains(search_term, case=False, na=False), uds4_var] = uds4_value
+                            # Extract the search terms from the grep function
+                            search_terms = re.search(r'grep\("(.*?)",', uds3_value).group(1).lower().split(" or ")
+                            # Apply the search terms to find matching rows in uds3_df
+                            match_mask = uds3_df[uds3_var].astype(str).str.lower().apply(lambda x: any(term in x for term in search_terms))
+                            uds4_df.loc[match_mask, uds4_var] = uds4_value
+                            
+                            
+                            
 
                     # If the mapping type is not 'Structured_Transformations' or 'High_Complexity', preserve non-mapped values
                     if mapping_type not in ['Structured_Transformations','High_Complexity']:
