@@ -146,6 +146,9 @@ def process_mappings(mapping_data, mapping_type):
                     
                     # If the UDS4 variable exists in the UDS4 DataFrame
                     if uds4_var in uds4_df.columns:
+                        # .isna() is not capturing the missing rows due to '<NA>', replacing the values of '<NA>' object type to pd.NA
+                        uds4_df[uds4_var] = uds4_df[uds4_var].replace(['<NA>', 'null'], pd.NA).astype('string')
+                        
                         # Identify rows in UDS4 where the value is missing (NaN)
                         stm = uds4_df[uds4_var].isna()
 
@@ -604,7 +607,7 @@ final_df = replace_nan_and_na(uds4_df)
 process_and_save_data(
     data_order_path, 
     final_df, 
-    "uds4_redcap_data.csv")
+    "uds4_redcap_data_python.csv")
 
 print("Your Data Migration from UDS3 to UDS4 is Completed")
 print("The UDS4 Data is saved in the current folder with name - uds4_redcap_data.csv")

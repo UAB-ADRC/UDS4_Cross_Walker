@@ -172,19 +172,24 @@ process_mappings <- function(mapping_data, mapping_type) {
         
         if (!grepl("\\|", uds3_value) && !grepl("grep\\(", uds3_value)) {
           if (uds4_var %in% colnames(uds4_df)) {
-            # Find rows where 'uds4_var' is NA in 'uds4_df'
+            # Normalize '<NA>' and 'null' as NA
+            uds4_df[[uds4_var]][uds4_df[[uds4_var]] %in% c("<NA>", "null")] <- NA
+            
+            # Identify NA rows in uds4
             stm <- is.na(uds4_df[[uds4_var]])
             
-            # Create the condition for matching values in 'uds3_df' and 'uds3_value'
-            update_rows <- stm & (as.character(uds3_df[[uds3_var]]) == uds3_value)
+            # Match condition on uds3
+            condition <- as.character(uds3_df[[uds3_var]]) == uds3_value
             
-            if (!all(is.na(update_rows))) { 
-              # Perform the assignment where the condition is TRUE
-              uds4_df[!is.na(update_rows), uds4_var] <- uds4_value
+            # Combine condition
+            update_rows <- stm & condition
+            
+            # Replace only where update_rows is TRUE (i.e., not NA)
+            if (any(update_rows %in% TRUE, na.rm = TRUE)) {
+              uds4_df[which(update_rows), uds4_var] <- uds4_value
             }
-            
-
           }
+          
           else {
             # Replace only where condition is TRUE (excluding NAs)
             uds4_df[!is.na(uds3_df[[uds3_var]]) & as.character(uds3_df[[uds3_var]]) == uds3_value, uds4_var] <- uds4_value
@@ -490,15 +495,17 @@ process_mappings <- function(mapping_data, mapping_type) {
               # Handle float type
               if (is.numeric(uds3_df[[uds3_var]])) {
                 float_uds3_value <- as.numeric(uds3_value)
-                
+
                 # CATCH For tremrest type of columns if no structured mappings
                 if(is.na(float_uds3_value)){
+                  
                   # do nothing
                   
                 }
                 
                 else{
                   uds4_df[!is.na(uds3_df[[uds3_var]]) & uds3_df[[uds3_var]] == float_uds3_value, uds4_var] <- uds4_value
+
                 }
                 
               } else if(uds3_value=='NULL') {
