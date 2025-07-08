@@ -1583,6 +1583,282 @@
     ],
     "Structured_Transformations": [
         {
+            "UDS3_variable": "ALIENLML | ALIENLMR",
+            "UDS4_variable": "ALIENLIMB",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS Form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "B8",
+                            "UDS4_value": "B8",
+                            "reversible": "NA",
+                            "note": "ADRC must decide appropriate merging and mapping"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "5i1 & 5i2",
+                            "UDS4_value": "4i",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "5i1. Alien limb consistent with CBS__Left | 52i. Alien limb consistent with CBS__Right",
+                            "UDS4_value": "4i. Alien limb phenomenon",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Numeric factor & Numeric factor",
+                            "UDS4_value": "Numeric factor",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1, 8 & 1,8",
+                            "UDS4_value": "0-1, 8",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "NA & NA",
+                            "UDS4_value": 0,
+                            "reversible": "NA",
+                            "note": "ALIENLIMB maps to 0 ONLY if BOTH ALIENLML is blank/NA and ALIENLMR is blank/NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1 | 1",
+                            "UDS4_value": 1,
+                            "reversible": "NA",
+                            "note": "ALIENLIMB maps to 1 if ALIENLML==1 OR ALIENLMR==1"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "8 & 8",
+                            "UDS4_value": "8",
+                            "reversible": "NA",
+                            "note": "ALIENLIMB only maps to 8 when both ALIENLML==8 AND ALIENLMR==8"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "<BLANK> & <BLANK>",
+                            "UDS4_value": "Absent",
+                            "reversible": "NA",
+                            "note": "ALIENLIMB maps to 'Absent' ONLY if both ALIENLML=='<BLANK>' AND ALIENLMR=='<BLANK>'"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1 Yes | 1 Yes",
+                            "UDS4_value": "Present",
+                            "reversible": "NA",
+                            "note": "ALIENLIMB maps to 'Present' if ALIENLML=='1 Yes' OR ALIENLMR=='1 Yes'"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "8 Not assessed & 8 Not assessed",
+                            "UDS4_value": "Not Assessed",
+                            "reversible": "NA",
+                            "note": "ALIENLIMB only maps to 'Not Assessed' when both ALIENLML=='8 Not assessed' AND ALIENLMR=='8 Not assessed'"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Structured mapping",
+                    "mappings": [
+                        {
+                            "UDS3_value": "IF(ALIENLML==1 || ALIENLMR==1) {ALIENLIMB=1} ELSEIF(ALIENLML==8 && ALIENLMR==8) {ALIENLIMB=8} ELSE {ALIENLIMB=0}",
+                            "UDS4_value": "IF(ALIENLML==1 || ALIENLMR==1) {ALIENLIMB=1} ELSEIF(ALIENLML==8 && ALIENLMR==8) {ALIENLIMB=8} ELSE {ALIENLIMB=0}",
+                            "reversible": "NA",
+                            "note": "ADRC must decide appropriate merging and mapping"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "UDS3_variable": "SOMATL | SOMATR",
+            "UDS4_variable": "UNISOMATO",
+            "crosswalk_mappings": [
+                {
+                    "mapping_type": "UDS Form",
+                    "mappings": [
+                        {
+                            "UDS3_value": "B8",
+                            "UDS4_value": "B8",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap question number",
+                    "mappings": [
+                        {
+                            "UDS3_value": "3e1 & 3e2",
+                            "UDS4_value": "4g",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "UDS REDCap field label",
+                    "mappings": [
+                        {
+                            "UDS3_value": "3e1. Somatosensory loss__Left | 3e2. Somatosensory loss__Right",
+                            "UDS4_value": "4g. Unilateral Somatosensory loss <span style=\"font-weight: normal;\">(<i>localized to the brain; disregard sensory changes localized to the spinal cord or peripheral nerves</i>)</span>",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Data type",
+                    "mappings": [
+                        {
+                            "UDS3_value": "Numeric factor & Numeric factor",
+                            "UDS4_value": "Numeric factor",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Conformity",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1, 8 & 1,8",
+                            "UDS4_value": "0-1, 8",
+                            "reversible": "NA",
+                            "note": "NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "NA & NA",
+                            "UDS4_value": 0,
+                            "reversible": "NA",
+                            "note": "UNISOMATO maps to 0 ONLY if BOTH SOMATL is blank/NA and SOMATR is blank/NA"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1 | 1",
+                            "UDS4_value": 1,
+                            "reversible": "NA",
+                            "note": "UNISOMATO maps to 1 if SOMATL==1 OR SOMATR==1"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "8 & 8",
+                            "UDS4_value": "8",
+                            "reversible": "NA",
+                            "note": "UNISOMATO only maps to 8 when both SOMATL==8 AND SOMATR==8"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LEVELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "<BLANK> & <BLANK>",
+                            "UDS4_value": "Absent",
+                            "reversible": "NA",
+                            "note": "UNISOMATO maps to 'Absent' ONLY if both SOMATL=='<BLANK>' OR SOMATR=='<BLANK>'"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "1 Yes | 1 Yes",
+                            "UDS4_value": "Present",
+                            "reversible": "NA",
+                            "note": "UNISOMATO maps to 'Present' if SOMATL=='1 Yes' OR SOMATR=='1 Yes'"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Response LABELS",
+                    "mappings": [
+                        {
+                            "UDS3_value": "8 Not assessed & 8 Not assessed",
+                            "UDS4_value": "Not Assessed",
+                            "reversible": "NA",
+                            "note": "UNISOMATO only maps to 'Not Assessed' when both SOMATL=='8 Not assessed' AND SOMATR=='8 Not assessed'"
+                        }
+                    ]
+                },
+                {
+                    "mapping_type": "Structured mapping",
+                    "mappings": [
+                        {
+                            "UDS3_value": "IF(SOMATL==1 || SOMATR==1) {UNISOMATO=1} ELSEIF(SOMATL==8 && SOMATR==8) {UNISOMATO=8} ELSE {UNISOMATO=0}",
+                            "UDS4_value": "IF(SOMATL==1 || SOMATR==1) {UNISOMATO=1} ELSEIF(SOMATL==8 && SOMATR==8) {UNISOMATO=8} ELSE {UNISOMATO=0}",
+                            "reversible": "NA",
+                            "note": "ADRC must decide appropriate merging and mapping"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "UDS3_variable": "TELCOG",
             "UDS4_variable": "RMREASB8",
             "crosswalk_mappings": [
@@ -1891,144 +2167,6 @@
         }
     ],
     "High_Complexity": [
-        {
-            "UDS3_variable": "ALIENLML | ALIENLMR",
-            "UDS4_variable": "ALIENLIMB",
-            "crosswalk_mappings": [
-                {
-                    "mapping_type": "UDS Form",
-                    "mappings": [
-                        {
-                            "UDS3_value": "B8",
-                            "UDS4_value": "B8",
-                            "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "UDS REDCap question number",
-                    "mappings": [
-                        {
-                            "UDS3_value": "5i1 & 5i2",
-                            "UDS4_value": "4i",
-                            "reversible": "NA",
-                            "note": "NA"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "UDS REDCap field label",
-                    "mappings": [
-                        {
-                            "UDS3_value": "5i1. Alien limb consistent with CBS__Left | 52i. Alien limb consistent with CBS__Right",
-                            "UDS4_value": "4i. Alien limb phenomenon",
-                            "reversible": "NA",
-                            "note": "NA"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Data type",
-                    "mappings": [
-                        {
-                            "UDS3_value": "Numeric factor & Numeric factor",
-                            "UDS4_value": "Numeric factor",
-                            "reversible": "NA",
-                            "note": "NA"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Conformity",
-                    "mappings": [
-                        {
-                            "UDS3_value": "1, 8 & 1,8",
-                            "UDS4_value": "0-1, 8",
-                            "reversible": "NA",
-                            "note": "NA"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Response LEVELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "NA & NA",
-                            "UDS4_value": 0,
-                            "reversible": "NA",
-                            "note": "ALIENLIMB maps to 0 ONLY if BOTH ALIENLML is blank/NA and ALIENLMR is blank/NA"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Response LEVELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "1 | 1",
-                            "UDS4_value": 1,
-                            "reversible": "NA",
-                            "note": "ALIENLIMB maps to 1 if ALIENLML==1 OR ALIENLMR==1"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Response LEVELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "8 & 8",
-                            "UDS4_value": "8",
-                            "reversible": "NA",
-                            "note": "ALIENLIMB only maps to 8 when both ALIENLML==8 AND ALIENLMR==8"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Response LABELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "<BLANK> & <BLANK>",
-                            "UDS4_value": "Absent",
-                            "reversible": "NA",
-                            "note": "ALIENLIMB maps to 'Absent' ONLY if both ALIENLML=='<BLANK>' AND ALIENLMR=='<BLANK>'"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Response LABELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "1 Yes | 1 Yes",
-                            "UDS4_value": "Present",
-                            "reversible": "NA",
-                            "note": "ALIENLIMB maps to 'Present' if ALIENLML=='1 Yes' OR ALIENLMR=='1 Yes'"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Response LABELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "8 Not assessed & 8 Not assessed",
-                            "UDS4_value": "Not Assessed",
-                            "reversible": "NA",
-                            "note": "ALIENLIMB only maps to 'Not Assessed' when both ALIENLML=='8 Not assessed' AND ALIENLMR=='8 Not assessed'"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Structured mapping",
-                    "mappings": [
-                        {
-                            "UDS3_value": "IF(ALIENLML==1 || ALIENLMR==1) {ALIENLIMB=1} ELSEIF(ALIENLML==8 && ALIENLMR==8) {ALIENLIMB=8} ELSE {ALIENLIMB=0}",
-                            "UDS4_value": "IF(ALIENLML==1 || ALIENLMR==1) {ALIENLIMB=1} ELSEIF(ALIENLML==8 && ALIENLMR==8) {ALIENLIMB=8} ELSE {ALIENLIMB=0}",
-                            "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
-                        }
-                    ]
-                }
-            ]
-        },
         {
             "UDS3_variable": "APRAXL | APRAXR",
             "UDS4_variable": "LIMBAPRAX",
@@ -2813,7 +2951,7 @@
                             "UDS3_value": "1",
                             "UDS4_value": "4",
                             "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
+                            "note": "NA"
                         }
                     ]
                 },
@@ -2824,7 +2962,7 @@
                             "UDS3_value": "1 Yes",
                             "UDS4_value": "Apractic/magnetic gait",
                             "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
+                            "note": "NA"
                         }
                     ]
                 }
@@ -2841,7 +2979,7 @@
                             "UDS3_value": "1",
                             "UDS4_value": "5",
                             "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
+                            "note": "NA"
                         }
                     ]
                 },
@@ -2852,7 +2990,7 @@
                             "UDS3_value": "1 Yes",
                             "UDS4_value": "Hypokinetic/parkinsonian gait",
                             "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
+                            "note": "NA"
                         }
                     ]
                 }
@@ -2996,7 +3134,7 @@
                             "UDS3_value": "1",
                             "UDS4_value": "5",
                             "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
+                            "note": "NA"
                         }
                     ]
                 },
@@ -3007,7 +3145,7 @@
                             "UDS3_value": "1 Yes",
                             "UDS4_value": "Hypokinetic/parkinsonian gait",
                             "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
+                            "note": "NA"
                         }
                     ]
                 }
@@ -3065,7 +3203,7 @@
                     "mapping_type": "Conformity",
                     "mappings": [
                         {
-                            "UDS3_value": "1, 8 & 1,8 & 1, 8",
+                            "UDS3_value": "1, 8 & 1,8 & 0-1",
                             "UDS4_value": "0-1, 8",
                             "reversible": "NA",
                             "note": "NA"
@@ -3076,10 +3214,10 @@
                     "mapping_type": "Response LEVELS",
                     "mappings": [
                         {
-                            "UDS3_value": "NA & NA & NA",
+                            "UDS3_value": "NA & NA & 0",
                             "UDS4_value": 0,
                             "reversible": "NA",
-                            "note": "GAITABN maps to 0 ONLY if ALL PARKGAIT is blank/NA and GAITPSP is blank/NA and GAITNPH is blank/NA"
+                            "note": "ADRC must decide appropriate merging and accounting of GAITNPH; GAITABN maps to 0 ONLY if ALL PARKGAIT is blank/NA and GAITPSP is blank/NA and GAITNPH is blank/NA/0"
                         }
                     ]
                 },
@@ -3091,17 +3229,6 @@
                             "UDS4_value": "1",
                             "reversible": "NA",
                             "note": "GAITABN maps to 1 if PARKGAIT==1 OR GAITPSP==1 OR GAITNPH==1"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Response LEVELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "8 & 8 & 8",
-                            "UDS4_value": "8",
-                            "reversible": "NA",
-                            "note": "GAITABN only maps to 8 when ALL PARKGAIT==8 AND GAITPSP==8 AND GAITNPH==8"
                         }
                     ]
                 },
@@ -3126,28 +3253,6 @@
                             "note": "GAITABN maps to 'Present' if PARKGAIT=='1 Yes' OR GAITPSP=='1 Yes' OR GAITNPH=='1 Yes'"
                         }
                     ]
-                },
-                {
-                    "mapping_type": "Response LABELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "8 Not assessed & 8 Not assessed & 8 Not assessed",
-                            "UDS4_value": "Not assessed",
-                            "reversible": "NA",
-                            "note": "GAITABN only maps to 'Not Assessed' when ALL PARKGAIT=='8 Not assessed' AND GAITPSP=='8 Not assessed' AND GAITNPH=='8 Not assessed'"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Structured mapping",
-                    "mappings": [
-                        {
-                            "UDS3_value": "IF(PARKGAIT==1 || GAITPSP==1 || GAITNPH==1) {GAITABN=1} ELSEIF(PARKGAIT==8 && GAITPSP==8 && GAITNPH==8) {GAITABN=8} ELSE {GAITABN=0}",
-                            "UDS4_value": "IF(PARKGAIT==1 || GAITPSP==1 || GAITNPH==1) {GAITABN=1} ELSEIF(PARKGAIT==8 && GAITPSP==8 && GAITNPH==8) {GAITABN=8} ELSE {GAITABN=0}",
-                            "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
-                        }
-                    ]
                 }
             ]
         },
@@ -3162,7 +3267,7 @@
                             "UDS3_value": "B8 & B8 & B8",
                             "UDS4_value": "B8",
                             "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
+                            "note": "NA"
                         }
                     ]
                 },
@@ -3173,7 +3278,7 @@
                             "UDS3_value": "2e & 5d & 7",
                             "UDS4_value": 5,
                             "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
+                            "note": "NA"
                         }
                     ]
                 },
@@ -3184,7 +3289,7 @@
                             "UDS3_value": "2e. Parkinsonian gait disorder | 5d. Gait disorder consistent with PSP | 7. Normal-pressure hydrocephalus: gait apraxia",
                             "UDS4_value": "Gait__<div class=\"rich-text-field-label\"><p><span style=\"font-weight: normal;\">5a. Finding:</span></p></div>",
                             "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
+                            "note": "NA"
                         }
                     ]
                 },
@@ -3195,7 +3300,7 @@
                             "UDS3_value": "Numeric factor & Numeric factor & Numeric factor",
                             "UDS4_value": "Numeric factor",
                             "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
+                            "note": "NA"
                         }
                     ]
                 },
@@ -3203,10 +3308,10 @@
                     "mapping_type": "Conformity",
                     "mappings": [
                         {
-                            "UDS3_value": "1, 8 & 1,8 & 1, 8",
+                            "UDS3_value": "1, 8 & 1,8 & 0-1",
                             "UDS4_value": "1-7",
                             "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
+                            "note": "NA"
                         }
                     ]
                 }
@@ -3599,144 +3704,6 @@
                             "UDS4_value": "Not Assessed",
                             "reversible": "NA",
                             "note": "SLOWINGFM only maps to 'Not Assessed' when both SLOWINGL=='8 Not assessed' AND SLOWINGR=='8 Not assessed'"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "UDS3_variable": "SOMATL | SOMATR",
-            "UDS4_variable": "UNISOMATO",
-            "crosswalk_mappings": [
-                {
-                    "mapping_type": "UDS Form",
-                    "mappings": [
-                        {
-                            "UDS3_value": "B8",
-                            "UDS4_value": "B8",
-                            "reversible": "NA",
-                            "note": "NA"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "UDS REDCap question number",
-                    "mappings": [
-                        {
-                            "UDS3_value": "3e1 & 3e2",
-                            "UDS4_value": "4g",
-                            "reversible": "NA",
-                            "note": "NA"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "UDS REDCap field label",
-                    "mappings": [
-                        {
-                            "UDS3_value": "3e1. Somatosensory loss__Left | 3e2. Somatosensory loss__Right",
-                            "UDS4_value": "4g. Unilateral Somatosensory loss <span style=\"font-weight: normal;\">(<i>localized to the brain; disregard sensory changes localized to the spinal cord or peripheral nerves</i>)</span>",
-                            "reversible": "NA",
-                            "note": "NA"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Data type",
-                    "mappings": [
-                        {
-                            "UDS3_value": "Numeric factor & Numeric factor",
-                            "UDS4_value": "Numeric factor",
-                            "reversible": "NA",
-                            "note": "NA"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Conformity",
-                    "mappings": [
-                        {
-                            "UDS3_value": "1, 8 & 1,8",
-                            "UDS4_value": "0-1, 8",
-                            "reversible": "NA",
-                            "note": "NA"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Response LEVELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "NA & NA",
-                            "UDS4_value": 0,
-                            "reversible": "NA",
-                            "note": "UNISOMATO maps to 0 ONLY if BOTH SOMATL is blank/NA and SOMATR is blank/NA"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Response LEVELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "1 | 1",
-                            "UDS4_value": 1,
-                            "reversible": "NA",
-                            "note": "UNISOMATO maps to 1 if SOMATL==1 OR SOMATR==1"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Response LEVELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "8 & 8",
-                            "UDS4_value": "8",
-                            "reversible": "NA",
-                            "note": "UNISOMATO only maps to 8 when both SOMATL==8 AND SOMATR==8"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Response LEVELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "<BLANK> & <BLANK>",
-                            "UDS4_value": "Absent",
-                            "reversible": "NA",
-                            "note": "UNISOMATO maps to 'Absent' ONLY if both SOMATL=='<BLANK>' OR SOMATR=='<BLANK>'"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Response LABELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "1 Yes | 1 Yes",
-                            "UDS4_value": "Present",
-                            "reversible": "NA",
-                            "note": "UNISOMATO maps to 'Present' if SOMATL=='1 Yes' OR SOMATR=='1 Yes'"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Response LABELS",
-                    "mappings": [
-                        {
-                            "UDS3_value": "8 Not assessed & 8 Not assessed",
-                            "UDS4_value": "Not Assessed",
-                            "reversible": "NA",
-                            "note": "UNISOMATO only maps to 'Not Assessed' when both SOMATL=='8 Not assessed' AND SOMATR=='8 Not assessed'"
-                        }
-                    ]
-                },
-                {
-                    "mapping_type": "Structured mapping",
-                    "mappings": [
-                        {
-                            "UDS3_value": "IF(SOMATL==1 || SOMATR==1) {UNISOMATO=1} ELSEIF(SOMATL==8 && SOMATR==8) {UNISOMATO=8} ELSE {UNISOMATO=0}",
-                            "UDS4_value": "IF(SOMATL==1 || SOMATR==1) {UNISOMATO=1} ELSEIF(SOMATL==8 && SOMATR==8) {UNISOMATO=8} ELSE {UNISOMATO=0}",
-                            "reversible": "NA",
-                            "note": "ADRC must decide appropriate merging and mapping"
                         }
                     ]
                 }
