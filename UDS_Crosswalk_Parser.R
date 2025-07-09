@@ -146,10 +146,20 @@ process_mappings <- function(mapping_data, mapping_type) {
         secondary_col <- uds3_vars[2]
         
         if (primary_col %in% colnames(uds3_df) && secondary_col %in% colnames(uds3_df)) {
+
+          if(uds4_var == 'diabtype')
+          {
+          mask <- (is.na(uds3_df[[primary_col]]) | uds3_df[[primary_col]] == "NA") & (uds3_df[[secondary_col]] != 0)
+
+          }
+
+          else{
           # Handle both NA and 'NA' cases
           mask <- is.na(uds3_df[[primary_col]]) | uds3_df[[primary_col]] == "NA"
+          }
           uds3_df[mask, primary_col] <- uds3_df[mask, secondary_col]
           uds3_var <- primary_col
+
         } else if (primary_col %in% colnames(uds3_df)) {
           uds3_var <- primary_col
         } else {

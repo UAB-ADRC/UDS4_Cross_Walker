@@ -103,7 +103,7 @@ def process_mappings(mapping_data, mapping_type):
             structured_mappings = [m for m in mapping.get("crosswalk_mappings", []) if m["mapping_type"] == "Structured mapping"]
   
 
-        # Special Case: Handling cases where uds3_var has two columns separated by " | " - useful for sheets like A5D2,B1 and B8        # Special Case: Handling cases where uds3_var has two columns separated by " | " - useful for sheets like A5D2,B1 and B8
+        # Special Case: Handling cases where uds3_var has two columns separated by " | " - useful for sheets like A5D2,B1 and B8
         if "|" in uds3_var and not structured_mappings:
             
             # Split the uds3_var into two columns based on " | " separator
@@ -115,14 +115,21 @@ def process_mappings(mapping_data, mapping_type):
 
                 # Check if both primary and secondary columns exist in the uds3_df DataFrame
                 if primary_col in uds3_df.columns and secondary_col in uds3_df.columns:
-                    # Handle both NaN and 'NA' cases
-                    mask = uds3_df[primary_col].isnull() | (uds3_df[primary_col] == "NA")
-                    # Filling up the missing values in primary_col with secondary_col values
-                    uds3_df.loc[mask, primary_col] = uds3_df.loc[mask, secondary_col]
+                
+                # This is a special variable where we dont want to have/impute the uds4 data with value of 0
+                    if uds4_var == "diabtype":
+                        # Creating a mask where primary_col is NA or null, and secondary_col is NOT 0
+                        mask = (uds3_df[primary_col].isnull() | (uds3_df[primary_col] == "NA")) & (uds3_df[secondary_col] != 0)
                     
+                    else:
+                        # Handle both NaN and 'NA' cases
+                        mask = uds3_df[primary_col].isnull() | (uds3_df[primary_col] == "NA")
+
+                    # Filling up the missing values in primary_col with secondary_col values
+                    uds3_df.loc[mask, primary_col] = uds3_df.loc[mask, secondary_col]   
                     # Set uds3_var to primary_col as it will be used for the next steps
                     uds3_var = primary_col
-
+                    
                 # If only the primary column exists in uds3_df
                 elif primary_col in uds3_df.columns:
                     uds3_var = primary_col  # Use primary_col for further operations
@@ -603,11 +610,13 @@ data_crosscheck(uds4_df)
 # Saving the appropriate data
 final_df = replace_nan_and_na(uds4_df)
 
+# File name to save
+uds4_file_name = "uds4_redcap_data_py.csv"
 # Saving the ordered data
 process_and_save_data(
     data_order_path, 
     final_df, 
-    "uds4_redcap_data_python.csv")
+    uds4_file_name)
 
 print("Your Data Migration from UDS3 to UDS4 is Completed")
-print("The UDS4 Data is saved in the current folder with name - uds4_redcap_data.csv")
+print(f"The UDS4 Data is saved in the current folder with name - {uds4_file_name}")
