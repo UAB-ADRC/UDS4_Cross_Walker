@@ -180,43 +180,44 @@ def process_mappings(mapping_data, mapping_type):
                         # Split the UDS3 variables to handle multiple conditions
                         uds3_vars = uds3_var.split(" | ")
 
-                        # Create a dictionary mapping UDS3 values to UDS4 values
                         response_map = {str(item["UDS3_value"]): str(item["UDS4_value"]) 
                                         for mapping in response_levels 
                                         for item in mapping["mappings"]}
 
-                        # Iterate through each UDS3-UDS4 value pair in the response map
-                        for uds3_value, uds4_value in response_map.items():
+                        # Separate OR and AND conditions to control processing order
+                        or_conditions = {k: v for k, v in response_map.items() if "|" in k}
+                        and_conditions = {k: v for k, v in response_map.items() if "&" in k}
 
-                            # Determine the logical operator used (OR or AND)
-                            operator = "|" if "|" in uds3_value else "&"
-
-                            # Split UDS3 values based on the operator to handle multiple conditions
+                        # Process OR conditions first
+                        for uds3_value, uds4_value in or_conditions.items():
+                            operator = "|"
                             values = uds3_value.split(f" {operator} ")
 
-                            # Handle logical OR conditions
-                            if operator == "|":
-                                condition = False  # Start with False for OR logic
+                            condition = False  # Start with False for OR logic
+                            for col, val in zip(uds3_vars, values):
+                                # Handle NULL or missing values
+                                if val in ["NA", "None"]:
+                                    condition |= uds3_df[col].isna() | (uds3_df[col].astype(str).str.upper().isin(["NA"]))
+                                else:
+                                    # Match exact values
+                                    condition |= (uds3_df[col].astype(str) == val)
 
-                                for col, val in zip(uds3_vars, values):
-                                    # Handle NULL or missing values
-                                    if val in ["NA", "None"]:
-                                        condition |= uds3_df[col].isna() | (uds3_df[col].astype(str).str.upper().isin(["NA"]))
-                                    else:
-                                        # Match exact values
-                                        condition |= (uds3_df[col].astype(str) == val)
+                            # Apply the transformation by updating the UDS4 dataframe
+                            uds4_df.loc[condition, uds4_var] = uds4_value
 
-                            # Handle logical AND conditions
-                            elif operator == "&":
-                                condition = True  # Start with True for AND logic
+                        # Process AND conditions second (these will overwrite OR conditions where applicable)
+                        for uds3_value, uds4_value in and_conditions.items():
+                            operator = "&"
+                            values = uds3_value.split(f" {operator} ")
 
-                                for col, val in zip(uds3_vars, values):
-                                    # Handle NULL or missing values
-                                    if val in ["NA", "None"]:
-                                        condition &= uds3_df[col].isna() | (uds3_df[col].astype(str).str.upper().isin(["NA"]))
-                                    else:
-                                        # Match exact values
-                                        condition &= (uds3_df[col].astype(str) == val)
+                            condition = True  # Start with True for AND logic
+                            for col, val in zip(uds3_vars, values):
+                                # Handle NULL or missing values
+                                if val in ["NA", "None"]:
+                                    condition &= uds3_df[col].isna() | (uds3_df[col].astype(str).str.upper().isin(["NA"]))
+                                else:
+                                    # Match exact values
+                                    condition &= (uds3_df[col].astype(str) == val)
 
                             # Apply the transformation by updating the UDS4 dataframe
                             uds4_df.loc[condition, uds4_var] = uds4_value
