@@ -228,49 +228,53 @@ process_mappings <- function(mapping_data, mapping_type) {
               }
             }
             
-            for (uds3_val in names(response_map)) {
-              uds4_val <- response_map[[uds3_val]]
+            # Separate OR and AND conditions
+            or_conditions <- Filter(function(k) grepl("\\|", k), names(response_map))
+            and_conditions <- Filter(function(k) grepl("&", k), names(response_map))
+            
+            # Process OR conditions first
+            for (key in or_conditions) {
+              values <- unlist(strsplit(key, " \\| "))
+              uds4_val <- response_map[[key]]
               
-              # Determine logical operator (AND / OR)
-              operator <- if (grepl("\\|", uds3_val)) "\\|" else "&"
+              condition <- rep(FALSE, nrow(uds3_df))
               
-              # Split the values correctly
-              values <- unlist(strsplit(uds3_val, paste0(" ", operator, " ")))
-              
-              if (operator == "\\|") {  # OR condition
-                condition <- rep(FALSE, nrow(uds3_df))  # Start with all FALSE
+              for (i in seq_along(uds3_vars)) {
+                col <- uds3_vars[i]
+                val <- values[i]
                 
-                for (i in seq_along(uds3_vars)) {
-                  col <- uds3_vars[i]
-                  val <- values[i]
-                  
-                  if (val %in% c("NA", "NULL")) {
-                    condition <- condition | is.na(uds3_df[[col]]) | as.character(uds3_df[[col]]) == "NA"
-                  } else {
-                    condition <- condition | (as.character(uds3_df[[col]]) == val)
-                  }
-                }
-                
-              } else {  # AND condition
-                condition <- rep(TRUE, nrow(uds3_df))  # Start with all TRUE
-                
-                for (i in seq_along(uds3_vars)) {
-                  col <- uds3_vars[i]
-                  val <- values[i]
-                  
-                  if (val %in% c("NA", "NULL")) {
-                    condition <- condition & (is.na(uds3_df[[col]]) | as.character(uds3_df[[col]]) == "NA")
-                  } else {
-                    condition <- condition & (as.character(uds3_df[[col]]) == val)
-                  }
-                  
+                if (val %in% c("NA", "None")) {
+                  condition <- condition | is.na(uds3_df[[col]]) | toupper(as.character(uds3_df[[col]])) == "NA"
+                } else {
+                  condition <- condition | (as.character(uds3_df[[col]]) == val)
                 }
               }
               
-              # Apply transformation safely using which(condition)
+              uds4_df[which(condition), uds4_var] <- uds4_val
+            }
+            
+            # Process AND conditions second
+            for (key in and_conditions) {
+              values <- unlist(strsplit(key, " & "))
+              uds4_val <- response_map[[key]]
+              
+              condition <- rep(TRUE, nrow(uds3_df))
+              
+              for (i in seq_along(uds3_vars)) {
+                col <- uds3_vars[i]
+                val <- values[i]
+                
+                if (val %in% c("NA", "None")) {
+                  condition <- condition & (is.na(uds3_df[[col]]) | toupper(as.character(uds3_df[[col]])) == "NA")
+                } else {
+                  condition <- condition & (as.character(uds3_df[[col]]) == val)
+                }
+              }
+              
               uds4_df[which(condition), uds4_var] <- uds4_val
             }
           }
+          
           
           # Identify separator: OR ('|') or AND ('&')
           separator <- NULL
@@ -375,7 +379,9 @@ process_mappings <- function(mapping_data, mapping_type) {
           
           
           # Handle paste() function
-          if (grepl("paste\\(", uds4_value)) {
+          if (!is.null(uds4_value) && !is.na(uds4_value) && 
+              length(uds4_value) == 1 && is.character(uds4_value) && 
+              grepl("paste\\(", uds4_value)) { 
             comp_raw <- gsub("paste\\(|\\)", "", uds4_value) %>% 
               strsplit(",") %>% 
               unlist()
@@ -506,10 +512,10 @@ process_mappings <- function(mapping_data, mapping_type) {
               if (is.numeric(uds3_df[[uds3_var]])) {
                 float_uds3_value <- as.numeric(uds3_value)
 
-                # CATCH For tremrest type of columns if no structured mappings
+                # CATCH For tremrest type of columns if no structured mappings and impnomci kind of columns
                 if(is.na(float_uds3_value)){
                   
-                  # do nothing
+                  uds4_df[is.na(uds3_df[[uds3_var]]), uds4_var] <- uds4_value
                   
                 }
                 
@@ -519,10 +525,11 @@ process_mappings <- function(mapping_data, mapping_type) {
                 }
                 
               } else if(uds3_value=='NULL') {
-  
+
                 uds4_df[is.na(uds3_df[[uds3_var]]), uds4_var] <- uds4_value
                 
               } else {
+
                 uds4_df[!is.na(uds3_df[[uds3_var]])& as.character(uds3_df[[uds3_var]]) == uds3_value, uds4_var] <- uds4_value
               }
             } else {
@@ -562,6 +569,8 @@ process_mappings <- function(mapping_data, mapping_type) {
               
               # Assign value only to matched rows
               uds4_df[matches, uds4_var] <- response_map[[uds3_value]]
+              
+              
             }
           }
 
@@ -644,6 +653,19 @@ data_crosscheck <- function(uds4_df) {
           uds4_df[logic_mask, target_col] <- NA
         }
       }
+    }
+    else if(uds4_var %in% d1_variables)
+    {
+
+      logic_mask <- is.na(uds4_df[[uds4_var]])
+      uds4_df[logic_mask, uds4_var] <- 0
+
+    }
+    
+    else if(uds4_var %in% c("diabetes"))
+    {
+      uds4_df[[uds4_var]][uds4_df[[uds4_var]] %in% c(3)] <- 1
+      
     }
   }
   
@@ -735,6 +757,7 @@ struct_map1 <- list(
 a3_list <- c('sib###yob', 'sib###agd', 'sib###pdx','sib###ago','sib###moe', 
              'kid###yob', 'kid###agd', 'kid###pdx','kid###ago','kid###moe')
 
+d1_variables <- c('csfad','cdommem','mci','cdomattn','cdomexec','cdomlang','cdomvisu')
 ########################### Main Process #############################################
 
 # Loading files and folders manually if not running from command line

@@ -460,8 +460,6 @@ def process_mappings(mapping_data, mapping_type):
                             match_mask = uds3_df[uds3_var].astype(str).str.lower().apply(lambda x: any(term in x for term in search_terms))
                             uds4_df.loc[match_mask, uds4_var] = uds4_value
                             
-                            
-                            
 
                     # If the mapping type is not 'Structured_Transformations' or 'High_Complexity', preserve non-mapped values
                     if mapping_type not in ['Structured_Transformations','High_Complexity']:
@@ -508,6 +506,10 @@ def data_crosscheck(uds4_df):
             # For rows where the value is missing, replace it with the corresponding value from a3_stop_dict
             # The mapping in a3_stop_dict provides the replacement value for that particular variable
             uds4_df.loc[logic_mask, a3_stop_dict[uds4_var]] = 'NA'
+        
+        elif uds4_var in recode_rules:
+                recode_map = recode_rules[uds4_var]
+                uds4_df[uds4_var] = uds4_df[uds4_var].replace(recode_map)
 
 
 def process_and_save_data(file_path, final_df, output_file):
@@ -555,6 +557,10 @@ struct_map1 = {'hrtattage':'cvhatt','strokage':'cbstroke','pdage':'pd','lasttbi'
 
 a3_list = ['sib###yob', 'sib###agd','sib###pdx','sib###ago','sib###moe',
            'kid###yob', 'kid###agd','kid###pdx','kid###ago','kid###moe']
+
+recode_rules = {"diabetes": {3: 1},"csfad": {np.nan: 0},"cdommem": {np.nan: 0},"mci": {np.nan: 0},
+                "cdomattn": {np.nan: 0},"cdomexec": {np.nan: 0},"cdomlang": {np.nan: 0},"cdomvisu": {np.nan: 0}}
+
 
 ########################### Main Process #############################################
 
