@@ -558,7 +558,7 @@ struct_map1 = {'hrtattage':'cvhatt','strokage':'cbstroke','pdage':'pd','lasttbi'
 a3_list = ['sib###yob', 'sib###agd','sib###pdx','sib###ago','sib###moe',
            'kid###yob', 'kid###agd','kid###pdx','kid###ago','kid###moe']
 
-recode_rules = {"diabetes": {3: 1},"csfad": {np.nan: 0},"cdommem": {np.nan: 0},"mci": {np.nan: 0},
+recode_rules = {"diabetes": {3: 1},"csfad": {np.nan: 0},"taupet": {np.nan: 0}, "cdommem": {np.nan: 0},"mci": {np.nan: 0},
                 "cdomattn": {np.nan: 0},"cdomexec": {np.nan: 0},"cdomlang": {np.nan: 0},"cdomvisu": {np.nan: 0}}
 
 

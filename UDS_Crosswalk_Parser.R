@@ -757,7 +757,8 @@ struct_map1 <- list(
 a3_list <- c('sib###yob', 'sib###agd', 'sib###pdx','sib###ago','sib###moe', 
              'kid###yob', 'kid###agd', 'kid###pdx','kid###ago','kid###moe')
 
-d1_variables <- c('csfad','cdommem','mci','cdomattn','cdomexec','cdomlang','cdomvisu')
+d1_variables <- c('csfad','taupet','cdommem','mci','cdomattn','cdomexec','cdomlang','cdomvisu')
+
 ########################### Main Process #############################################
 
 # Loading files and folders manually if not running from command line
