@@ -790,15 +790,17 @@ nacc <- read_csv(uds3_data_path)
 cat(sprintf("UDS3_data has %d rows and %d columns\n", nrow(nacc), ncol(nacc)))
 
 # Convert float-like strings to integers and pad with zeros
-nacc <- nacc %>%
-  mutate(
-    momprdx = ifelse(!is.na(momprdx), 
-                     sprintf("%03.0f", as.numeric(momprdx)), 
-                     "NA"),
-    dadprdx = ifelse(!is.na(dadprdx), 
-                     sprintf("%03.0f", as.numeric(dadprdx)), 
-                     "NA")
-  )
+cols_to_format <- c("momprdx", "dadprdx",
+                    paste0("sib", 1:20, "pdx"),
+                    paste0("kid", 1:15, "pdx"))
+
+# Filter only existing columns
+existing_cols <- intersect(cols_to_format, colnames(nacc))
+
+# Apply formatting
+nacc[existing_cols] <- lapply(nacc[existing_cols], function(col) {
+  ifelse(!is.na(col), sprintf("%03.0f", as.numeric(col)), "NA")
+})
 
 # Copy the nacc data to uds3_df and convert column names to lowercase
 uds3_df <- nacc
