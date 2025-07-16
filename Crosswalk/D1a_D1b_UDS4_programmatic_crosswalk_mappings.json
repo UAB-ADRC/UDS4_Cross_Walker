@@ -9165,13 +9165,13 @@
                     ]
                 },
                 {
-                    "mapping_type": "Merging rule",
+                    "mapping_type": "Structured mapping",
                     "mappings": [
                         {
                             "UDS3_value": "strplit(FRMDATED1A, \"/\")",
                             "UDS4_value": "paste(VISITMO__D1, \"/\", VISITDAY_D1, \"/\", VISITYR_D1)",
                             "reversible": "Yes",
-                            "note": "Merging rule presented as R expression"
+                            "note": "Structured mapping presented as R expression"
                         }
                     ]
                 }
@@ -9237,13 +9237,13 @@
                     ]
                 },
                 {
-                    "mapping_type": "Merging rule",
+                    "mapping_type": "Structured mapping",
                     "mappings": [
                         {
                             "UDS3_value": "strplit(FRMDATED1B, \"/\")",
                             "UDS4_value": "paste(VISITMO__D1, \"/\", VISITDAY_D1, \"/\", VISITYR_D1)",
                             "reversible": "Yes",
-                            "note": "Merging rule presented as R expression"
+                            "note": "Structured mapping presented as R expression"
                         }
                     ]
                 }
