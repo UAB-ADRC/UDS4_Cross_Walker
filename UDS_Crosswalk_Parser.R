@@ -85,7 +85,7 @@ process_repeating_variables <- function(uds3_var, uds4_var, uds3_df, uds4_df, re
         if (val %in% names(response_map)) {
           return(response_map[[val]])
         } else {
-          return(val)  # If not found, return the original value
+          return("NA")  # If not found, return the original value
         }
       })
       
@@ -113,6 +113,8 @@ process_mappings <- function(mapping_data, mapping_type) {
   # Get the list of mappings for the mapping type
   mappings <- mapping_data[[mapping_type]] %||% list()
   
+  # Filled indices, special varible to keep track of the diabetes column rows
+  filled_indices <- list()
   # Iterate through each mapping
   for (mapping in mappings) {
     # Extract and normalize UDS3 and UDS4 variable names
@@ -156,7 +158,13 @@ process_mappings <- function(mapping_data, mapping_type) {
           else{
           # Handle both NA and 'NA' cases
           mask <- is.na(uds3_df[[primary_col]]) | uds3_df[[primary_col]] == "NA"
-          }
+          if(uds4_var=='diabetes')
+          # Preserving the rows in filled_indices variable where we are considering the "diabet" 
+          # column that equals to 2, and we need to replace its corresponding rows with 1 according to rule map settings
+            {
+            fill_mask <- mask & uds3_df[[secondary_col]] == 2
+            filled_indices <- which(fill_mask)}
+            }
           uds3_df[mask, primary_col] <- uds3_df[mask, secondary_col]
           uds3_var <- primary_col
 
@@ -243,7 +251,7 @@ process_mappings <- function(mapping_data, mapping_type) {
                 col <- uds3_vars[i]
                 val <- values[i]
                 
-                if (val %in% c("NA", "None")) {
+                if (val %in% c("NA", "NULL")) {
                   condition <- condition | is.na(uds3_df[[col]]) | toupper(as.character(uds3_df[[col]])) == "NA"
                 } else {
                   condition <- condition | (as.character(uds3_df[[col]]) == val)
@@ -264,7 +272,7 @@ process_mappings <- function(mapping_data, mapping_type) {
                 col <- uds3_vars[i]
                 val <- values[i]
                 
-                if (val %in% c("NA", "None")) {
+                if (val %in% c("NA", "NULL")) {
                   condition <- condition & (is.na(uds3_df[[col]]) | toupper(as.character(uds3_df[[col]])) == "NA")
                 } else {
                   condition <- condition & (as.character(uds3_df[[col]]) == val)
@@ -487,6 +495,16 @@ process_mappings <- function(mapping_data, mapping_type) {
           if (uds4_var %in% colnames(uds4_df)) {
             mask <- is.na(uds4_df[[uds4_var]])
             uds4_df[mask, uds4_var] <- uds3_df[mask, uds3_var]
+
+            # Force over writing the diabetes column to comply with the rules
+            if (uds4_var =='diabetes')
+            {
+              uds4_df[[uds4_var]][uds4_df[[uds4_var]] %in% c(3)] <- 1
+              
+              if (!is.null(filled_indices) && length(filled_indices) > 0) {
+                uds4_df[[uds4_var]][filled_indices] <- 1}
+            }
+
           } else {
             
             uds4_df[[uds4_var]] <- uds3_df[[uds3_var]]
@@ -640,7 +658,6 @@ replace_nan_and_na <- function(df) {
     mutate(across(where(is.character), ~ ifelse(is.na(.) | . == "<NA>", "NA", .)))
 }
 
-
 # Cross-checking data function
 data_crosscheck <- function(uds4_df) {
   for (uds4_var in colnames(uds4_df)) {
@@ -656,19 +673,11 @@ data_crosscheck <- function(uds4_df) {
     }
     else if(uds4_var %in% d1_variables)
     {
-
       logic_mask <- is.na(uds4_df[[uds4_var]])
       uds4_df[logic_mask, uds4_var] <- 0
-
-    }
-    
-    else if(uds4_var %in% c("diabetes"))
-    {
-      uds4_df[[uds4_var]][uds4_df[[uds4_var]] %in% c(3)] <- 1
-      
-    }
+    } 
   }
-  
+
   return(uds4_df)
 }
 
@@ -821,7 +830,6 @@ row.names(uds4_df) <- 1:nrow(uds3_df)
 
 # Process all the JSON data and get the updated uds4_df
 uds4_df <- process_all_jsons(json_folder_path)
-
 
 ########################### Data Validation and saving #############################################
 

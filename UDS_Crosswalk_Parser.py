@@ -56,7 +56,7 @@ def process_repeating_variables(uds3_var, uds4_var, uds3_df, uds4_df, response_m
         if response_map:
             # Create a mapping function to speed up value replacement
             col_values = uds3_df[new_uds3_col].astype(str)
-            mapped_values = col_values.map(lambda val: response_map.get(val, val))
+            mapped_values = col_values.map(lambda val: response_map[val] if val in response_map else "NA")
 
             # Handle unmatched values
             if not new_uds4_col.endswith("tpr"):
@@ -76,6 +76,8 @@ def process_mappings(mapping_data, mapping_type):
         mapping_data (dict): The dictionary containing mapping configurations.
         mapping_type (str): The type of mapping to process (e.g., 'Direct_Mappings').
     """
+    filled_indices = [] # special tracking for diabetes column present in A5D2 Form
+
     # Iterate through each mapping entry for the given mapping type
     for mapping in mapping_data.get(mapping_type, []):
         
@@ -124,6 +126,11 @@ def process_mappings(mapping_data, mapping_type):
                     else:
                         # Handle both NaN and 'NA' cases
                         mask = uds3_df[primary_col].isnull() | (uds3_df[primary_col] == "NA")
+                        
+                        if uds4_var == 'diabetes':
+                            fill_mask = mask & (uds3_df[secondary_col] == 2)
+                            # Store the index positions where the fill happens with value 2
+                            filled_indices = uds3_df.index[fill_mask].tolist()
 
                     # Filling up the missing values in primary_col with secondary_col values
                     uds3_df.loc[mask, primary_col] = uds3_df.loc[mask, secondary_col]   
@@ -408,6 +415,10 @@ def process_mappings(mapping_data, mapping_type):
                     if uds4_var in uds4_df:
                         mask = uds4_df[uds4_var].isna()
                         uds4_df.loc[mask, uds4_var] = uds3_df[uds3_var]
+
+                        if uds4_var=='diabetes':
+                            uds4_df[uds4_var] = uds4_df[uds4_var].replace({3: 1})
+                            uds4_df.loc[filled_indices, uds4_var] = 1
                     
                     else: 
                        
@@ -558,7 +569,7 @@ struct_map1 = {'hrtattage':'cvhatt','strokage':'cbstroke','pdage':'pd','lasttbi'
 a3_list = ['sib###yob', 'sib###agd','sib###pdx','sib###ago','sib###moe',
            'kid###yob', 'kid###agd','kid###pdx','kid###ago','kid###moe']
 
-recode_rules = {"diabetes": {3: 1},"csfad": {np.nan: 0},"taupet": {np.nan: 0}, "cdommem": {np.nan: 0},"mci": {np.nan: 0},
+recode_rules = {"csfad": {np.nan: 0},"taupet": {np.nan: 0}, "cdommem": {np.nan: 0},"mci": {np.nan: 0},
                 "cdomattn": {np.nan: 0},"cdomexec": {np.nan: 0},"cdomlang": {np.nan: 0},"cdomvisu": {np.nan: 0}}
 
 
@@ -582,8 +593,14 @@ print(f"UDS3_data has {nacc.shape[0]} rows and {nacc.shape[1]} columns")
 uds4_df = pd.DataFrame()
 
 # Convert float-like strings to integers and pad with zeros
-nacc['momprdx'] = nacc['momprdx'].apply(lambda x: f"{float(x):03.0f}" if pd.notnull(x) else "NA")
-nacc['dadprdx'] = nacc['dadprdx'].apply(lambda x: f"{float(x):03.0f}" if pd.notnull(x) else "NA")
+cols_to_format = (['momprdx', 'dadprdx'] +
+    [f"sib{i}pdx" for i in range(1, 21)] + [f"kid{i}pdx" for i in range(1, 16)])
+
+# Filter only existing columns
+existing_cols = [col for col in cols_to_format if col in nacc.columns]
+
+# Apply formatting
+nacc[existing_cols] = nacc[existing_cols].applymap(lambda x: f"{float(x):03.0f}" if pd.notnull(x) else "NA")
 
 # Copying the nacc_data to uds3_df
 uds3_df = nacc.copy()
