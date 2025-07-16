@@ -9165,13 +9165,13 @@
                     ]
                 },
                 {
-                    "mapping_type": "Structured mapping",
+                    "mapping_type": "Merging rule",
                     "mappings": [
                         {
                             "UDS3_value": "strplit(FRMDATED1A, \"/\")",
                             "UDS4_value": "paste(VISITMO__D1, \"/\", VISITDAY_D1, \"/\", VISITYR_D1)",
                             "reversible": "Yes",
-                            "note": "Structured mapping presented as R expression"
+                            "note": "Merging rule presented as R expression"
                         }
                     ]
                 }
@@ -9237,13 +9237,13 @@
                     ]
                 },
                 {
-                    "mapping_type": "Structured mapping",
+                    "mapping_type": "Merging rule",
                     "mappings": [
                         {
                             "UDS3_value": "strplit(FRMDATED1B, \"/\")",
                             "UDS4_value": "paste(VISITMO__D1, \"/\", VISITDAY_D1, \"/\", VISITYR_D1)",
                             "reversible": "Yes",
-                            "note": "Structured mapping presented as R expression"
+                            "note": "Merging rule presented as R expression"
                         }
                     ]
                 }
@@ -12414,8 +12414,8 @@
                     "mapping_type": "Merging rule",
                     "mappings": [
                         {
-                            "UDS3_value": "IF(TAUPETAD==1 || TAUPETFTLD==1) {TAUPET = 1} ELSE {TAUPET=0}",
-                            "UDS4_value": "IF(TAUPETAD==1 || TAUPETFTLD==1) {TAUPET = 1} ELSE {TAUPET=0}",
+                            "UDS3_value": "IF(TAUPETAD==1 || TPETFTLD==1) {TAUPET = 1} ELSE {TAUPET=0}",
+                            "UDS4_value": "IF(TAUPETAD==1 || TPETFTLD==1) {TAUPET = 1} ELSE {TAUPET=0}",
                             "reversible": "Yes",
                             "note": "ADRC must decide if TAUPETAD and TPETFTLD can merge onto TAUPET"
                         }
@@ -12552,8 +12552,8 @@
                     "mapping_type": "Merging rule",
                     "mappings": [
                         {
-                            "UDS3_value": "IF(TAUPETAD==1 || TAUPETFTLD==1) {TAUPET = 1} ELSE {TAUPET=0}",
-                            "UDS4_value": "IF(TAUPETAD==1 || TAUPETFTLD==1) {TAUPET = 1} ELSE {TAUPET=0}",
+                            "UDS3_value": "IF(TAUPETAD==1 || TPETFTLD==1) {TAUPET = 1} ELSE {TAUPET=0}",
+                            "UDS4_value": "IF(TAUPETAD==1 || TPETFTLD==1) {TAUPET = 1} ELSE {TAUPET=0}",
                             "reversible": "Yes",
                             "note": "ADRC must decide if TAUPETAD and TPETFTLD can merge onto TAUPET"
                         }
