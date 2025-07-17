@@ -516,7 +516,7 @@ def data_crosscheck(uds4_df):
             
             # For rows where the value is missing, replace it with the corresponding value from a3_stop_dict
             # The mapping in a3_stop_dict provides the replacement value for that particular variable
-            uds4_df.loc[logic_mask, a3_stop_dict[uds4_var]] = 'NA'
+            uds4_df.loc[logic_mask, a3_stop_dict[uds4_var]] = pd.NA
         
         elif uds4_var in recode_rules:
                 recode_map = recode_rules[uds4_var]
